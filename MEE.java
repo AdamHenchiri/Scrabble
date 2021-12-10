@@ -11,9 +11,8 @@ public class MEE {
      * A:  Crée un multi-ensemble vide dont les éléments seront inférieurs à max
      * @param max
      */
-    public MEE(int max){
-        //Si la variable 'max', passer en parametre est supérieur ou égale à 0  
-        if(max >= 0){
+    public MEE(int max) {
+
             //On initialise le tableau 'tabFreq' et 'nbToEx' à 0
             this.tabFreq = new int[max];
             this.nbTotEx = 0;
@@ -21,7 +20,6 @@ public class MEE {
             for(int i=0; i<this.tabFreq.length; i++) {
                 this.tabFreq[i] = 0;
             }
-        }
     }
 
     /**
@@ -33,14 +31,11 @@ public class MEE {
         boolean intinTabPositifOrNull = true;
         //Check all elements un the parameter tab.
         for(int i=0; i<tab.length; i++){
-            //If the element in tab[i] is less than 0
-            if(tab[i] < 0){
                 //Si intinTabPositifOrNull est à true alors
                 if(intinTabPositifOrNull == true){
                     //On passe la variable boolean à faux
                     intinTabPositifOrNull = false;
                 }
-            }
         }
 
         //Si la variable initialisé avant est true
@@ -97,7 +92,7 @@ public class MEE {
      * @return
      */
     public boolean estVide(){
-        //On initializa la variable 'estVide', sur vrai
+        //On initialise la variable 'estVide', sur vrai
         boolean estVide = true;
 
         //On fait une boucle pour connaitre si l'element est vide
@@ -117,8 +112,6 @@ public class MEE {
      * @param i
      */
     public void ajoute(int i){
-        //On véréfie le pré-requis de la méthode
-        if(i > 0 && i < this.tabFreq.length){
             //Si le chiffre est bon alors on ajoute dans 'tabFreq' 1 exemplaire
             this.tabFreq[i] = this.tabFreq[i]+1;
             this.nbTotEx++;
@@ -132,14 +125,14 @@ public class MEE {
      * @return
      */
     public boolean retire(int i){
-        //On initialize la variable 'retireFonctionne' pour savoir si nous avons réussi à retirer l'exemplaire
+        //On initialise la variable 'retireFonctionne' pour savoir si nous avons réussi à retirer l'exemplaire
         boolean retireFonctionne = false;
         //Si il existe un exemplaire dans this alors
         if(this.tabFreq[i] > 0){
             this.tabFreq[i] = this.tabFreq[i] - 1;
             this.nbTotEx--;
             retireFonctionne = true;
-        }
+        
 
         return retireFonctionne;
     }
@@ -178,18 +171,15 @@ public class MEE {
      * @return
      */
     public boolean transfere(MEE e, int i){
-        //On initialize la variable 'resultat', qui est un boolean.
+        //On initialise la variable 'resultat', qui est un boolean.
         boolean resultat = false;
 
-        //On fait les prérequis, si i >= 0 et i est < a la limite de l'ensemble et tabFreq[i] > 0 alors:
-        if(i >= 0 && i < this.tabFreq.length && this.tabFreq[i] > 0){
             //On retire 1 de this a l'indice donnée.
             this.retire(i);
             //On ajoute 1 à l'ensemble e donnée en paramètre et a l'indice donnée.
             e.ajoute(i);
             //On passe la variable résultat à true.
             resultat = true;
-        }
 
         //On retourne la variable boolean.
         return resultat;
