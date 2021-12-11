@@ -1,9 +1,9 @@
-public class Case{
+public class Case {
     private int couleur;
     private char letter;
 
-    public Case (int uneCouleur){
-        this.couleur=uneCouleur;
+    public Case(int uneCouleur) {
+        this.couleur = uneCouleur;
     }
 
     public int getCouleur() {
@@ -17,13 +17,14 @@ public class Case{
     public void setLetter(char let) {
         this.letter = let;
     }
-    public Boolean estRecouvert(){
-        return(this.letter != ' ');
+
+    public Boolean estRecouvert() {
+        return (this.letter != ' ');
     }
 
     @Override
     public String toString() {
         return "Case [couleur=" + couleur + ", letter=" + letter + "]";
     }
-    
+
 }
