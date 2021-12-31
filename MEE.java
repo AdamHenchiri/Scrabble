@@ -64,6 +64,11 @@ public class MEE {
         return this.nbTotEx;
     }
 
+
+    public int[] getTabFreq() {
+        return this.tabFreq;
+    }
+
     /**
      * PR: Nothing
      * A: Le résultat est vrai si est seulement si l'ensemble est vide
