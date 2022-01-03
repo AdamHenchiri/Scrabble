@@ -65,8 +65,8 @@ public class MEE {
     }
 
 
-    public int[] getTabFreq() {
-        return this.tabFreq;
+    public int getTabFreq(int i) {
+        return this.tabFreq[i];
     }
 
     /**
