@@ -15,6 +15,7 @@ public class Scrabble {
         p.place("IFGJ",7,4,'v',meeP1);
         System.out.println(p.toString());
         System.out.println(p.nbPointsPlacement("INES",7,4,'h',nbPointsJeton));
+        System.out.println(p.nbPointsPlacement("IFGJ",7,4,'v',nbPointsJeton));
         
     }
 }
