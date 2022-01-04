@@ -181,7 +181,7 @@ public class Ut {
 		return (char) (i + 97);
 	}
 
-	public static int indexToMaj(int i) {
+	public static char indexToMaj(int i) {
 		return (char) (i + 65);
 	}
 

@@ -36,8 +36,9 @@ public class Plateau {
 
     @Override
     public String toString() {
-        String res = "_______________________________" + "\n" + "|";
+        String res = "  .1.2.3.4.5.6.7.8.7.6.5.4.3.2.1."+"\n"+"  _______________________________" + "\n" ;
         for (int i = 0; i < 15; i++) {
+            res += Ut.indexToMaj(i)+ " |";
             for (int j = 0; j < 15; j++) {
                 if (this.g[i][j].estRecouvert()) {
                     res += this.g[i][j].getLetter() + "|";
@@ -47,8 +48,8 @@ public class Plateau {
                     res += " |";
                 }
             }
-            res += "\n" + "_______________________________" + "\n";
-            res += "|";
+            res += "\n" + "  _______________________________" + "\n";
+            
 
         }
         String res2 = res.substring(0, res.length() - 1);
@@ -74,6 +75,9 @@ public class Plateau {
                 i++;
             }
         }
+        if (test==false){
+            System.out.println("ERREUR::le placement de ce mot n'est pas rattacher a un autre..");
+        }
         return test;
     }
 
@@ -96,6 +100,9 @@ public class Plateau {
                 }
             }
         }
+        if (test==false){
+            System.out.println("ERREUR::ce mot est placé dans un autre");
+        }
         return test;
     }
 
@@ -114,18 +121,33 @@ public class Plateau {
                 }
             }
         }
+        if (test==false){
+            System.out.println("ERREUR::les lettres de ce mot qui sont deja placé sur le plateau ne correspondent pas ");
+        }
         return test;
     }
-
-    public boolean lettreexiste(String mot, MEE e) {
+    // renvoie true ssi toutes les lettres a placer existe dans le chevalet du joueur 
+    public boolean lettreexiste(String mot, MEE e,int numLig, int numCol, char sens) {
         boolean test = false;
         int i = 0;
+        MEE e1=new MEE(e);
         while (i < mot.length() && test == false) {
-            // System.out.println(Ut.majToIndex(mot.charAt(i)));
-            test = !(e.getTabFreq(Ut.majToIndex(mot.charAt(i))) > 0);
+            if ((sens == 'h') && this.g[numLig][i+numCol].estRecouvert()==false){
+            //System.out.println(Ut.majToIndex(mot.charAt(i)));
+            test = !(e1.getTabFreq(Ut.majToIndex(mot.charAt(i))) > 0);
+            e1.retire(Ut.majToIndex(mot.charAt(i)));
+            }
+            else if ((sens == 'v') && (this.g[i+numLig][numCol].estRecouvert())==false){
+                //System.out.println((mot.charAt(i)));
+                test = !(e1.getTabFreq(Ut.majToIndex(mot.charAt(i))) > 0);
+                e1.retire(Ut.majToIndex(mot.charAt(i)));
+            }
             i++;
         }
-        return !test;
+        if (test==true){
+            System.out.println("ERREUR::les lettres de ce mot n'existe pas sur votre chevalet");
+        }
+        return !test ;
     }
 
     public boolean placementValide(String mot, int numLig, int numCol, char sens, MEE e) {
@@ -138,29 +160,28 @@ public class Plateau {
         if (pasvide == false) {
              System.out.println("vide");
             if (sens == 'h' && numLig == 7 && numCol <= 7 && numCol >= 0 && numCol + mot.length() > 7
-                    && mot.length() > 2) {
+                    && mot.length() > 2 && lettreexiste(mot,e, numLig, numCol, sens)) {
                 test = true;
             } else if (sens == 'v' && numCol == 7 && numLig <= 7 && numLig >= 0 && numLig + mot.length() > 7
-                    && mot.length() > 2) {
+                    && mot.length() > 2 && lettreexiste(mot,e, numLig, numCol, sens)) {
                 test = true;
             }
         }
         // sinon si le plateau n'est pas vide
         else {
-
             if (sens == 'h') {
-                 System.out.println("pas vide et h");
+             System.out.println("pas vide et h");
                 if (contientUneCaseR(mot, numLig, numCol, sens) && contientUneCaseV(mot, numLig, numCol, sens)
                         && numCol + mot.length() < 15 && mêmelettre(mot, numLig, numCol, sens)
-                        && lettreexiste(mot, e)) {
+                        && lettreexiste(mot,e, numLig, numCol, sens)) {
                     test1 = true;
-                     System.out.println("1");
+                    // System.out.println("1");
                 }
                 if (numCol == 0) {
                     //System.out.println("2.1.1");
                     if (this.g[numLig][numCol + mot.length() + 1].estRecouvert() == false) {
                         test2 = true;
-                         System.out.println("2.1");
+                    //     System.out.println("2.1");
                     }
                 } else if (numCol + mot.length() == 15) {
                     //System.out.println("2.2.2");
@@ -174,31 +195,31 @@ public class Plateau {
                             && (this.g[numLig][numCol + mot.length() + 1].estRecouvert() == false)) {
 
                         test2 = true;
-                         System.out.println("2.3");
+                    //     System.out.println("2.3");
                     }
                 }
             }
-             //sinon si le sens du mot est vertical
+            //sinon si le sens du mot est vertical
             else {
                  System.out.println("pas vide et v");
                 if (contientUneCaseR(mot, numLig, numCol, sens) && contientUneCaseV(mot, numLig, numCol, sens)
                         && numLig + mot.length() < 15 && mêmelettre(mot, numLig, numCol, sens)
-                        && lettreexiste(mot, e)) {
+                        && lettreexiste(mot,e, numLig, numCol, sens)) {
                     test1 = true;
-                     System.out.println("1");
+                    // System.out.println("1");
                 }
                 if (numLig == 0){
                     //System.out.println("2.1.1");
                     if (this.g[numLig + 1][numCol].estRecouvert() == false) {
                         test2 = true;
-                         System.out.println("2.1");
+                    //     System.out.println("2.1");
                     }
                 }
                 else if (numLig + mot.length() == 15){
                         //System.out.println("2.2.2");
                         if (this.g[numLig + 1][numCol].estRecouvert() == false) {
                             test2 = true;
-                             System.out.println("2.2");
+                        //     System.out.println("2.2");
                         } 
                 }
                 else {
@@ -206,13 +227,14 @@ public class Plateau {
                         if ((this.g[numLig + mot.length() + 1][numCol].estRecouvert() == false)
                             && (this.g[numLig - 1][numCol].estRecouvert() == false)) {
                          test2 = true;
-                         System.out.println("2.3");
+                        // System.out.println("2.3");
                         }
                 }
 
             }
 
         }
+        System.out.println(((test) || (test1 && test2)));
         return ((test) || (test1 && test2));
     }
 
@@ -227,16 +249,43 @@ public class Plateau {
      */
     public int nbPointsPlacement(String mot, int numLig, int numCol, char sens, int[] nbPointsJet) {
         int res = 0;
+        boolean bonusx2=false;
+        boolean bonusx3=false;
         for (int i = 0; i < mot.length(); i++) {
             if (sens == 'h') {
-                // System.out.println(nbPointsJet[ Ut.majToIndex( mot.charAt(i) ) ] + " x "+
-                // g[numLig][numCol+i].getCouleur());
+                if (g[numLig][numCol + i].getCouleur()<4){
+                //System.out.println(nbPointsJet[ Ut.majToIndex( mot.charAt(i) ) ] + " x "+g[numLig][numCol+i].getCouleur());
                 res += nbPointsJet[Ut.majToIndex(mot.charAt(i))] * g[numLig][numCol + i].getCouleur();
+                }
+                else {
+                    res += nbPointsJet[Ut.majToIndex(mot.charAt(i))] ;
+                    if (g[numLig][numCol + i].getCouleur()==4){
+                        bonusx2=true;
+                        }
+                        else{
+                        bonusx3=true;
+                        }
+                }
             } else {
-                // System.out.println(nbPointsJet[ Ut.majToIndex( mot.charAt(i) ) ] + " x "+
-                // g[numLig+i][numCol].getCouleur());
+                // System.out.println(nbPointsJet[ Ut.majToIndex( mot.charAt(i) ) ] + " x "+g[numLig+i][numCol].getCouleur());
+                if (g[numLig + i][numCol].getCouleur()<4){
                 res += nbPointsJet[Ut.majToIndex(mot.charAt(i))] * g[numLig + i][numCol].getCouleur();
+                }
+                else{
+                    res += nbPointsJet[Ut.majToIndex(mot.charAt(i))];
+                    if (g[numLig + i][numCol].getCouleur()==4){
+                    bonusx2=true;
+                    }
+                    else{
+                    bonusx3=true;
+                    }
+                }
             }
+        }
+        if (bonusx2){
+          res=res*2;  
+        }else if (bonusx3){
+            res=res*3;
         }
         return res;
     }
@@ -251,17 +300,24 @@ public class Plateau {
      * @return le nombre de jetons retirés de e
      */
     public int place(String mot, int numLig, int numCol, char sens, MEE e) {
+        int nbLetPlace=0;
         if (sens == 'h') {
             for (int i = numCol; i < mot.length() + numCol; i++) {
+                if (g[numLig][i].getLetter()=='\0' ){
                 g[numLig][i].setLetter(mot.charAt(i - numCol));
-                // System.out.println(e.retire(Ut.majToIndex(mot.charAt(i-numCol))));
+                e.retire(Ut.majToIndex(mot.charAt(i-numCol)));
+                nbLetPlace++;
+                }
             }
         } else {
             for (int i = numLig; i < mot.length() + numLig; i++) {
+                if(g[i][numCol].getLetter()=='\0' ){
                 g[i][numCol].setLetter(mot.charAt(i - numLig));
-                // System.out.println(e.retire(Ut.majToIndex(mot.charAt(i-numLig))));
+                e.retire(Ut.majToIndex(mot.charAt(i-numLig)));
+                nbLetPlace++;
+                }
             }
         }
-        return mot.length();
+        return nbLetPlace;
     }
 }

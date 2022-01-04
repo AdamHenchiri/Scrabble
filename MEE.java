@@ -49,9 +49,14 @@ public class MEE {
      * @param e
      */
     public MEE(MEE e) {
+        // On initializa le tableau et le nbr
+        this.tabFreq = new int[e.tabFreq.length];
+        this.nbTotEx = 0;
         // On copie les éléments de e dans this
-        this.tabFreq = e.tabFreq;
-        this.nbTotEx = e.nbTotEx;
+        for (int i=0;i<e.tabFreq.length;i++){
+            this.tabFreq[i] = e.getTabFreq(i);
+        }
+        this.nbTotEx = e.getNbTotEx();
     }
 
     /**
