@@ -1,48 +1,66 @@
-public class Joueur{
+public class Joueur {
+
     private String nom;
     private MEE chevalet;
     private int score;
 
-    public Joueur(String unNom){
-        this.nom=unNom;
-    }
 
-    public Joueur(String nom, MEE chevalet, int score) {
-        this.nom = nom;
-        this.chevalet = chevalet;
-        this.score = score;
-    }
+    public Joueur(String unNom) {
+        
+        this.nom = unNom;
+        this.chevalet = new MEE(7);
+        this.score = 0;
 
-    public String getNom() {
-        return this.nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
     }
 
     public MEE getChevalet() {
+
         return this.chevalet;
     }
-
-    public void setChevalet(MEE chevalet) {
-        this.chevalet = chevalet;
-    }
-
+    
     public int getScore() {
+
         return this.score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
     @Override
     public String toString() {
+
         return "{" +
-            " nom='" + getNom() + "'" +
-            ", chevalet='" + getChevalet() + "'" +
-            ", score='" + getScore() + "'" +
-            "}";
+        " nom='" + getNom() + "'" +
+        ", chevalet='" + getChevalet() + "'" +
+        ", score='" + getScore() + "'" +
+        "}";
+    }
+
+    public void ajouteScore(int nb) {
+
+        this.score = this.score + nb;
+    }
+
+    /* pré-requis : nbPointsJet indique le nombre de points rapportés par chaque jeton/lettre */
+
+    public int nbPointsChevalet(int[] nbPointsJet) {
+
+        int nbPointsChevalet;
+
+        if (this.chevalet.estVide()) {
+
+            nbpointsChevalet = 0;
+
+        } else {
+
+            nbPointsChevalet = this.chevalet.sommeValeurs(nbPointsJet);
+        }
+
+        return (nbPointsChevalet);
+    }
+
+    /* pré-requis : les éléments de s sont inférieurs à 26 */ 
+
+    public void prendJetons(MEE s, int nbJetons) {
+
+        s.transfereAleat(this.chevalet,nbJetons);
     }
 
 }
