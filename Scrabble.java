@@ -1,25 +1,78 @@
-public class Scrabble {                  //A.B.C.D.E.F.G.H.I.J .K .L .M.N.O.P.Q.R.S.T.U.V.W.X .Y .Z
-    private static int[] nbPointsJeton = { 1,3,3,2,1,4,2,4,1,10,10,1,2,1,1,3,8,1,1,1,1,4,10,10,10,10 };
+public class Scrabble {                 // A. B. C. D. E. F. G. H. I.  J.  K. L. M. N. O. P. Q. R. S. T. U. V.  W.  X.  Y.  Z
+    private static int[] nbPointsJeton = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 10, 10, 1, 2, 1, 1, 3, 8, 1, 1, 1, 1, 4, 10, 10, 10, 10 };
 
     public static void main(String[] args) {
-                   //A.B.C.D.E.F.G.H.I.J.K.L.M.N.O.P.Q.R.S.T.U.V.W.X.Y.Z
-        int[] tab = {2,1,0,0,1,4,1,1,2,4,0,1,2,1,1,3,8,1,1,1,1,4,0,0,0,0};
+                   // A. B. C. D.  E. F. G. H. I. J. K. L. M. N. O. P. Q. R. S. T. U. V. W. X. Y. Z
+        int[] tab = { 7, 6, 4, 4, 16, 8, 3, 1, 3, 4, 1, 2, 2, 1, 4, 3, 8, 4, 1, 3, 2, 5, 0, 0, 1, 1 };
         MEE meeP1 = new MEE(tab);
         meeP1.sommeValeurs(nbPointsJeton);
-        Plateau p=new Plateau();
-        if(p.placementValide("ALIBIBA",7,5,'h',meeP1)){
-         p.place("ALIBIBA",7,5,'h',meeP1);
+        Plateau p = new Plateau();
+        if (p.placementValide("ALIBIBA", 7, 5, 'h', meeP1)) {
+            p.place("ALIBIBA", 7, 5, 'h', meeP1);
+            System.out.println(
+                    "votre mot est valide ! points=" + p.nbPointsPlacement("ALIBABA", 7, 5, 'h', nbPointsJeton));
         }
-        if(p.placementValide("IFGJ",7,7,'v',meeP1)){
-        p.place("IFGJ",7,7,'v',meeP1);
+        if (p.placementValide("IFGJ", 7, 7, 'v', meeP1)) {
+            System.out
+                    .println("votre mot est valide ! points=" + p.nbPointsPlacement("IFGJ", 7, 7, 'v', nbPointsJeton));
+            p.place("IFGJ", 7, 7, 'v', meeP1);
         }
-        if(p.placementValide("AFFJ",7,11,'v',meeP1)){
-            p.place("AFFJ",7,11,'v',meeP1);
+        if (p.placementValide("AFFJ", 7, 11, 'v', meeP1)) {
+            System.out
+                    .println("votre mot est valide ! points=" + p.nbPointsPlacement("AFFJ", 7, 11, 'v', nbPointsJeton));
+            p.place("AFFJ", 7, 11, 'v', meeP1);
+        }
+        if (p.placementValide("FLO", 9, 11, 'h', meeP1)) {
+            System.out
+                    .println("votre mot est valide ! points=" + p.nbPointsPlacement("FLO", 9, 11, 'h', nbPointsJeton));
+            p.place("FLO", 9, 11, 'h', meeP1);
+        }
+        if (p.placementValide("FUCK", 8, 11, 'h', meeP1)) {
+            System.out
+                    .println("votre mot est valide ! points=" + p.nbPointsPlacement("FUCK", 8, 11, 'h', nbPointsJeton));
+            p.place("FUCK", 8, 11, 'h', meeP1);
+        }
+        if (p.placementValide("AZERTYUF", 8, 0, 'h', meeP1)) {
+            System.out.println(
+                    "votre mot est valide ! points=" + p.nbPointsPlacement("AZERTYUF", 8, 0, 'h', nbPointsJeton));
+            p.place("AZERTYUF", 8, 0, 'h', meeP1);
+        }
+        if (p.placementValide("IVBCDEFG", 7, 9, 'v', meeP1)) {
+            System.out.println(
+                    "IVBCDEFG est valide ! points=" + p.nbPointsPlacement("IVBCDEFG", 7, 9, 'v', nbPointsJeton));
+            p.place("IVBCDEFG", 7, 9, 'v', meeP1);
+        }
+        if (p.placementValide("GOODIE", 14, 9, 'h', meeP1)) {
+            System.out.println(
+                    "votre mot est valide ! points=" + p.nbPointsPlacement("GOODIE", 14, 9, 'h', nbPointsJeton));
+            p.place("GOODIE", 14, 9, 'h', meeP1);
+        }
+        if (p.placementValide("VBCDEFGB", 0, 10, 'v', meeP1)) {
+            System.out.println(
+                    "votre mot est valide ! points=" + p.nbPointsPlacement("VBCDEFGB", 0, 10, 'v', nbPointsJeton));
+            p.place("VBCDEFGB", 0, 10, 'v', meeP1);
+        }
+        if (p.placementValide("VBCDE", 0, 10, 'h', meeP1)) {
+            System.out.println(
+                    "votre mot est valide ! points=" + p.nbPointsPlacement("VBCDE", 0, 10, 'h', nbPointsJeton));
+            p.place("VBCDE", 0, 10, 'h', meeP1);
+        }
+        if (p.placementValide("AGABAFLO", 9, 6, 'h', meeP1)) {
+            System.out.println(
+                    "votre mot est valide ! points=" + p.nbPointsPlacement("AGABAFLO", 9, 6, 'h', nbPointsJeton));
+            p.place("AGABAFLO", 9, 6, 'h', meeP1);
+        }
+        if (p.placementValide("EEEEEEE", 4, 4, 'h', meeP1)) {
+            System.out.println(
+                    "votre mot est valide ! points=" + p.nbPointsPlacement("EEEEEEE", 4, 4, 'h', nbPointsJeton));
+            p.place("EEEEEEE", 4, 4, 'h', meeP1);
+        }
+        if (p.placementValide("EEGOODIE", 14, 7, 'h', meeP1)) {
+            System.out.println(
+                    "votre mot est valide ! points=" + p.nbPointsPlacement("EEGOODIE", 14, 7, 'h', nbPointsJeton));
+            p.place("EEGOODIE", 14, 7, 'h', meeP1);
         }
         System.out.println(p.toString());
-        System.out.println(p.nbPointsPlacement("ALIBABA",7,5,'h',nbPointsJeton));
-        System.out.println(p.nbPointsPlacement("IFGJ",7,7,'v',nbPointsJeton));
-        System.out.println(p.nbPointsPlacement("AFFJ",7,11,'v',nbPointsJeton));
-        
+
     }
 }

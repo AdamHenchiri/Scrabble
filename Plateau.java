@@ -36,9 +36,9 @@ public class Plateau {
 
     @Override
     public String toString() {
-        String res = "  .1.2.3.4.5.6.7.8.7.6.5.4.3.2.1."+"\n"+"  _______________________________" + "\n" ;
+        String res = "  .1.2.3.4.5.6.7.8.7.6.5.4.3.2.1." + "\n" + "  _______________________________" + "\n";
         for (int i = 0; i < 15; i++) {
-            res += Ut.indexToMaj(i)+ " |";
+            res += Ut.indexToMaj(i) + " |";
             for (int j = 0; j < 15; j++) {
                 if (this.g[i][j].estRecouvert()) {
                     res += this.g[i][j].getLetter() + "|";
@@ -49,7 +49,6 @@ public class Plateau {
                 }
             }
             res += "\n" + "  _______________________________" + "\n";
-            
 
         }
         String res2 = res.substring(0, res.length() - 1);
@@ -75,7 +74,7 @@ public class Plateau {
                 i++;
             }
         }
-        if (test==false){
+        if (test == false) {
             System.out.println("ERREUR::le placement de ce mot n'est pas rattacher a un autre..");
         }
         return test;
@@ -100,54 +99,56 @@ public class Plateau {
                 }
             }
         }
-        if (test==false){
+        if (test == false) {
             System.out.println("ERREUR::ce mot est placé dans un autre");
         }
         return test;
     }
 
     public boolean mêmelettre(String mot, int numLig, int numCol, char sens) {
-        Boolean test = false;
+        Boolean test = true;
         if (sens == 'h') {
             for (int i = numCol; i < mot.length() + numCol; i++) {
-                if ((this.g[numLig][i].estRecouvert()) && (this.g[numLig][i].getLetter() == mot.charAt(i - numCol))) {
-                    test = true;
+                if ((this.g[numLig][i].estRecouvert()) && (this.g[numLig][i].getLetter() != mot.charAt(i - numCol))) {
+                    test = false;
                 }
             }
         } else {
             for (int i = numLig; i < mot.length() + numLig; i++) {
-                if ((this.g[i][numCol].estRecouvert()) && (this.g[i][numCol].getLetter() == mot.charAt(i - numLig))) {
-                    test = true;
+                if ((this.g[i][numCol].estRecouvert()) && (this.g[i][numCol].getLetter() != mot.charAt(i - numLig))) {
+                    test = false;
                 }
             }
         }
-        if (test==false){
-            System.out.println("ERREUR::les lettres de ce mot qui sont deja placé sur le plateau ne correspondent pas ");
+        if (test == false) {
+            System.out
+                    .println("ERREUR::les lettres de ce mot qui sont deja placé sur le plateau ne correspondent pas ");
         }
         return test;
     }
-    // renvoie true ssi toutes les lettres a placer existe dans le chevalet du joueur 
-    public boolean lettreexiste(String mot, MEE e,int numLig, int numCol, char sens) {
+
+    // renvoie true ssi toutes les lettres a placer existe dans le chevalet du
+    // joueur
+    public boolean lettreexiste(String mot, MEE e, int numLig, int numCol, char sens) {
         boolean test = false;
         int i = 0;
-        MEE e1=new MEE(e);
+        MEE e1 = new MEE(e);
         while (i < mot.length() && test == false) {
-            if ((sens == 'h') && this.g[numLig][i+numCol].estRecouvert()==false){
-            //System.out.println(Ut.majToIndex(mot.charAt(i)));
-            test = !(e1.getTabFreq(Ut.majToIndex(mot.charAt(i))) > 0);
-            e1.retire(Ut.majToIndex(mot.charAt(i)));
-            }
-            else if ((sens == 'v') && (this.g[i+numLig][numCol].estRecouvert())==false){
-                //System.out.println((mot.charAt(i)));
+            if ((sens == 'h') && this.g[numLig][i + numCol].estRecouvert() == false) {
+                // System.out.println(Ut.majToIndex(mot.charAt(i)));
+                test = !(e1.getTabFreq(Ut.majToIndex(mot.charAt(i))) > 0);
+                e1.retire(Ut.majToIndex(mot.charAt(i)));
+            } else if ((sens == 'v') && (this.g[i + numLig][numCol].estRecouvert()) == false) {
+                // System.out.println((mot.charAt(i)));
                 test = !(e1.getTabFreq(Ut.majToIndex(mot.charAt(i))) > 0);
                 e1.retire(Ut.majToIndex(mot.charAt(i)));
             }
             i++;
         }
-        if (test==true){
+        if (test == true) {
             System.out.println("ERREUR::les lettres de ce mot n'existe pas sur votre chevalet");
         }
-        return !test ;
+        return !test;
     }
 
     public boolean placementValide(String mot, int numLig, int numCol, char sens, MEE e) {
@@ -158,83 +159,82 @@ public class Plateau {
         boolean test2 = false;
         // si le plateau est vide
         if (pasvide == false) {
-             System.out.println("vide");
+            // System.out.println("vide");
             if (sens == 'h' && numLig == 7 && numCol <= 7 && numCol >= 0 && numCol + mot.length() > 7
-                    && mot.length() > 2 && lettreexiste(mot,e, numLig, numCol, sens)) {
+                    && mot.length() > 2 && lettreexiste(mot, e, numLig, numCol, sens)) {
                 test = true;
             } else if (sens == 'v' && numCol == 7 && numLig <= 7 && numLig >= 0 && numLig + mot.length() > 7
-                    && mot.length() > 2 && lettreexiste(mot,e, numLig, numCol, sens)) {
+                    && mot.length() > 2 && lettreexiste(mot, e, numLig, numCol, sens)) {
                 test = true;
             }
         }
         // sinon si le plateau n'est pas vide
         else {
             if (sens == 'h') {
-             System.out.println("pas vide et h");
+                // System.out.println("pas vide et h");
                 if (contientUneCaseR(mot, numLig, numCol, sens) && contientUneCaseV(mot, numLig, numCol, sens)
-                        && numCol + mot.length() < 15 && mêmelettre(mot, numLig, numCol, sens)
-                        && lettreexiste(mot,e, numLig, numCol, sens)) {
+                        && numCol + mot.length() <= 15 && mêmelettre(mot, numLig, numCol, sens)
+                        && lettreexiste(mot, e, numLig, numCol, sens)) {
                     test1 = true;
                     // System.out.println("1");
                 }
                 if (numCol == 0) {
-                    //System.out.println("2.1.1");
-                    if (this.g[numLig][numCol + mot.length() + 1].estRecouvert() == false) {
+                    // System.out.println("2.1.1");
+                    if (this.g[numLig][numCol + mot.length()].estRecouvert() == false) {
                         test2 = true;
-                    //     System.out.println("2.1");
+                        // System.out.println("2.1");
                     }
                 } else if (numCol + mot.length() == 15) {
-                    //System.out.println("2.2.2");
+                    // System.out.println("2.2.2");
                     if (this.g[numLig][numCol - 1].estRecouvert() == false)
 
                         test2 = true;
-                     System.out.println("2.2");
+                    // System.out.println("2.2");
                 } else {
-                    //System.out.println("2.3.3");
+                    // System.out.println("2.3.3");
                     if ((this.g[numLig][numCol - 1].estRecouvert() == false)
-                            && (this.g[numLig][numCol + mot.length() + 1].estRecouvert() == false)) {
-
+                            && (this.g[numLig][numCol + mot.length()].estRecouvert() == false)) {
                         test2 = true;
-                    //     System.out.println("2.3");
+                        // System.out.println("2.3");
                     }
                 }
             }
-            //sinon si le sens du mot est vertical
+            // sinon si le sens du mot est vertical
             else {
-                 System.out.println("pas vide et v");
+                // System.out.println("pas vide et v");
                 if (contientUneCaseR(mot, numLig, numCol, sens) && contientUneCaseV(mot, numLig, numCol, sens)
-                        && numLig + mot.length() < 15 && mêmelettre(mot, numLig, numCol, sens)
-                        && lettreexiste(mot,e, numLig, numCol, sens)) {
+                        && numLig + mot.length() <= 15 && mêmelettre(mot, numLig, numCol, sens)
+                        && lettreexiste(mot, e, numLig, numCol, sens)) {
                     test1 = true;
                     // System.out.println("1");
                 }
-                if (numLig == 0){
-                    //System.out.println("2.1.1");
+                if (numLig == 0) {
+                    // System.out.println("2.1.1");
+                    if (this.g[numLig + mot.length()][numCol].estRecouvert() == false) {
+                        test2 = true;
+                        // System.out.println("2.1");
+                    }
+                } else if (numLig + mot.length() == 15) {
+                    // System.out.println("2.2.2");
                     if (this.g[numLig + 1][numCol].estRecouvert() == false) {
                         test2 = true;
-                    //     System.out.println("2.1");
+                        // System.out.println("2.2");
                     }
-                }
-                else if (numLig + mot.length() == 15){
-                        //System.out.println("2.2.2");
-                        if (this.g[numLig + 1][numCol].estRecouvert() == false) {
-                            test2 = true;
-                        //     System.out.println("2.2");
-                        } 
-                }
-                else {
-                        //System.out.println("2.3.3");
-                        if ((this.g[numLig + mot.length() + 1][numCol].estRecouvert() == false)
+                } else {
+                    // System.out.println("2.3.3");
+                    if ((this.g[numLig + mot.length()][numCol].estRecouvert() == false)
                             && (this.g[numLig - 1][numCol].estRecouvert() == false)) {
-                         test2 = true;
+                        test2 = true;
                         // System.out.println("2.3");
-                        }
+                    }
                 }
 
             }
 
         }
-        System.out.println(((test) || (test1 && test2)));
+        // System.out.println (test1);
+        // System.out.println(test2);
+        // System.out.println(test);
         return ((test) || (test1 && test2));
     }
 
@@ -249,45 +249,38 @@ public class Plateau {
      */
     public int nbPointsPlacement(String mot, int numLig, int numCol, char sens, int[] nbPointsJet) {
         int res = 0;
-        boolean bonusx2=false;
-        boolean bonusx3=false;
+        int bonusx2 = 1;
+        int bonusx3 = 1;
         for (int i = 0; i < mot.length(); i++) {
             if (sens == 'h') {
-                if (g[numLig][numCol + i].getCouleur()<4){
-                //System.out.println(nbPointsJet[ Ut.majToIndex( mot.charAt(i) ) ] + " x "+g[numLig][numCol+i].getCouleur());
-                res += nbPointsJet[Ut.majToIndex(mot.charAt(i))] * g[numLig][numCol + i].getCouleur();
-                }
-                else {
-                    res += nbPointsJet[Ut.majToIndex(mot.charAt(i))] ;
-                    if (g[numLig][numCol + i].getCouleur()==4){
-                        bonusx2=true;
-                        }
-                        else{
-                        bonusx3=true;
-                        }
+                if (g[numLig][numCol + i].getCouleur() < 4) {
+                    // System.out.println(nbPointsJet[ Ut.majToIndex( mot.charAt(i) ) ] + " x
+                    // "+g[numLig][numCol+i].getCouleur());
+                    res += nbPointsJet[Ut.majToIndex(mot.charAt(i))] * g[numLig][numCol + i].getCouleur();
+                } else {
+                    res += nbPointsJet[Ut.majToIndex(mot.charAt(i))];
+                    if (g[numLig][numCol + i].getCouleur() == 4) {
+                        bonusx2 = bonusx2 * 2;
+                    } else {
+                        bonusx3 = bonusx3 * 3;
+                    }
                 }
             } else {
-                // System.out.println(nbPointsJet[ Ut.majToIndex( mot.charAt(i) ) ] + " x "+g[numLig+i][numCol].getCouleur());
-                if (g[numLig + i][numCol].getCouleur()<4){
-                res += nbPointsJet[Ut.majToIndex(mot.charAt(i))] * g[numLig + i][numCol].getCouleur();
-                }
-                else{
+                // System.out.println(nbPointsJet[ Ut.majToIndex( mot.charAt(i) ) ] + " x
+                // "+g[numLig+i][numCol].getCouleur());
+                if (g[numLig + i][numCol].getCouleur() < 4) {
+                    res += nbPointsJet[Ut.majToIndex(mot.charAt(i))] * g[numLig + i][numCol].getCouleur();
+                } else {
                     res += nbPointsJet[Ut.majToIndex(mot.charAt(i))];
-                    if (g[numLig + i][numCol].getCouleur()==4){
-                    bonusx2=true;
-                    }
-                    else{
-                    bonusx3=true;
+                    if (g[numLig + i][numCol].getCouleur() == 4) {
+                        bonusx2 = bonusx2 * 2;
+                    } else {
+                        bonusx3 = bonusx3 * 3;
                     }
                 }
             }
         }
-        if (bonusx2){
-          res=res*2;  
-        }else if (bonusx3){
-            res=res*3;
-        }
-        return res;
+        return res * bonusx2 * bonusx3;
     }
 
     /**
@@ -300,21 +293,21 @@ public class Plateau {
      * @return le nombre de jetons retirés de e
      */
     public int place(String mot, int numLig, int numCol, char sens, MEE e) {
-        int nbLetPlace=0;
+        int nbLetPlace = 0;
         if (sens == 'h') {
             for (int i = numCol; i < mot.length() + numCol; i++) {
-                if (g[numLig][i].getLetter()=='\0' ){
-                g[numLig][i].setLetter(mot.charAt(i - numCol));
-                e.retire(Ut.majToIndex(mot.charAt(i-numCol)));
-                nbLetPlace++;
+                if (g[numLig][i].getLetter() == '\0') {
+                    g[numLig][i].setLetter(mot.charAt(i - numCol));
+                    e.retire(Ut.majToIndex(mot.charAt(i - numCol)));
+                    nbLetPlace++;
                 }
             }
         } else {
             for (int i = numLig; i < mot.length() + numLig; i++) {
-                if(g[i][numCol].getLetter()=='\0' ){
-                g[i][numCol].setLetter(mot.charAt(i - numLig));
-                e.retire(Ut.majToIndex(mot.charAt(i-numLig)));
-                nbLetPlace++;
+                if (g[i][numCol].getLetter() == '\0') {
+                    g[i][numCol].setLetter(mot.charAt(i - numLig));
+                    e.retire(Ut.majToIndex(mot.charAt(i - numLig)));
+                    nbLetPlace++;
                 }
             }
         }

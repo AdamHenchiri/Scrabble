@@ -19,7 +19,7 @@ public class Case {
     }
 
     public Boolean estRecouvert() {
-        return ( this.letter !='\0');
+        return (this.letter != '\0');
     }
 
     @Override
