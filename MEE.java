@@ -180,32 +180,24 @@ public class MEE {
     }
 
     /**
-     * PR: k >= 0
-     * A: transfère k exemplaires choisis aléatoirement de this vers e dans la
-     * limite du contenu de this.
-     * 
-     * @param e
-     * @param k
+     * pré-requis : k >= 0
+     * action : tranfère k exemplaires choisis aléatoirement de this vers e
+     * dans la limite du contenu de this
+     * résultat : le nombre d’exemplaires effectivement transférés
      */
-    public void tranfereAleat(MEE e, int k) {
-        // Choisi un nombre aléatoire entre 0 et la longueur du tableau -1
-        Random rand = new Random();
-        int indice = rand.nextInt(0 - this.tabFreq.length - 1);
-
-        // Si l'élément contenue à l'indicie 'indice' dans le tableau est suppérieur à
-        // nombre d'élément que l'on veut enlever alors:
-        if (this.tabFreq[indice] > k) {
-            // On fait une boucle pour x fois de i=0 à i<k
-            for (int i = 0; i < k; i++) {
-                // On retire alors une fois l'élément à l'indice indiquer
-                this.retire(indice);
-            }
-            // Sinon
-        } else {
-            // On affiche une erreur:
-            System.out.println("ERROR: Trop peut d'exemplaire dans l'indice choisis");
+public int transfereAleat(MEE e, int k) {
+    int index=1;
+    int choix;
+    int resultat=0;
+    while(index<=k){
+        choix=Ut.randomMinMax(0,(this.tabFreq.length-1));
+        if(this.transfere(e, choix)){
+            resultat++;
         }
+        index++;
     }
+    return(resultat);
+}
 
     /**
      * PR: tabFreq.length <= v.length
