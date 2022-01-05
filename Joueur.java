@@ -42,25 +42,25 @@ public class Joueur {
 
     public int nbPointsChevalet(int[] nbPointsJet) {
 
-        int nbPointsChevalet;
+        int nbPointsChevalet=0;
 
-        if (this.chevalet.estVide()) {
-
-            nbpointsChevalet = 0;
-
-        } else {
+        if (!(this.chevalet.estVide())) {
 
             nbPointsChevalet = this.chevalet.sommeValeurs(nbPointsJet);
-        }
 
-        return (nbPointsChevalet);
+        } 
+        return nbPointsChevalet ;
     }
 
     /* pré-requis : les éléments de s sont inférieurs à 26 */ 
 
     public void prendJetons(MEE s, int nbJetons) {
-
+        int nbExampTransfer=0;
+        while (nbJetons!=0){
         s.transfereAleat(this.chevalet,nbJetons);
+        nbExampTransfer=s.transfereAleat(this.chevalet,nbJetons);
+        nbJetons=nbJetons-nbExampTransfer;
+        }
     }
 
 }
