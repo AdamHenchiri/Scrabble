@@ -152,11 +152,17 @@ public class Plateau {
     }
 
     public boolean placementValide(String mot, int numLig, int numCol, char sens, MEE e) {
+        char repCapelo='\0';
         boolean pasvide = this.g[7][7].estRecouvert();
         // System.out.println(pasvide);
         boolean test = false;
         boolean test1 = false;
         boolean test2 = false;
+        do {
+        System.out.println("CapeloDico valide ce mot O/N ?");
+        repCapelo=Ut.saisirCaractere();
+        }while (!(repCapelo=='O'||repCapelo=='N'));
+       if (repCapelo=='O'){
         // si le plateau est vide
         if (pasvide == false) {
             // System.out.println("vide");
@@ -232,6 +238,9 @@ public class Plateau {
             }
 
         }
+       }else if (repCapelo=='N'){
+           System.out.println("ERREUR::le mot n'est pas validé par CapeloDico!");
+       }
         // System.out.println (test1);
         // System.out.println(test2);
         // System.out.println(test);
