@@ -80,5 +80,6 @@ public class Joueur {
                 s.transfere(this.chevalet,i);
             }
         }
+    }    
 
 }
