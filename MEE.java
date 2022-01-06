@@ -172,12 +172,12 @@ public class MEE {
         boolean resultat = false;
 
         // On retire 1 de this a l'indice donnée.
-        this.retire(i);
+        if (this.retire(i) == true) {
         // On ajoute 1 à l'ensemble e donnée en paramètre et a l'indice donnée.
         e.ajoute(i);
         // On passe la variable résultat à true.
         resultat = true;
-
+        }
         // On retourne la variable boolean.
         return resultat;
     }
