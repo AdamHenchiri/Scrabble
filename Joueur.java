@@ -58,7 +58,7 @@ public class Joueur {
 
         int nbExampTransfer=0;
 
-        while (this.s.getNbTotEx()> nbJetons) {
+        while (s.getNbTotEx()> nbJetons) {
 
             while (nbJetons!=0) {
 
@@ -73,7 +73,7 @@ public class Joueur {
 /* le cas qu'il reste est si le nombre de jetons restant dans le sac est inférieur au nombre de jetons que le joueur doit piocher,
    on transfère donc l'intégralité du sac dans le chevalet du joueur  */
 
-        for (int i = 0 ; i < s.tabFreq.length ; i++) {
+        for (int i = 0 ; i < s. ; i++) {
 
             if (s.tabFreq[i] != 0) {
 
