@@ -69,10 +69,13 @@ public class MEE {
         return this.nbTotEx;
     }
 
-    public int getTabFreq(int i) {
+    public int getTabFreq() {
+        return this.tabFreq;
+    }
+    //retourne l'elemnt i de TabFreq
+    public int getEltTabFreq(int i){
         return this.tabFreq[i];
     }
-
     /**
      * PR: Nothing
      * A: Le résultat est vrai si est seulement si l'ensemble est vide

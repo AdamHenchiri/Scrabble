@@ -58,7 +58,7 @@ public class Joueur {
 
         int nbExampTransfer=0;
 
-        while (this.sac.getNbTotEx()> nbJetons) {
+        while (s.getNbTotEx()> nbJetons) {
 
             while (nbJetons!=0) {
 
