@@ -70,16 +70,14 @@ public class Joueur {
 
             }
         }
-/* le cas qu'il reste est si le nombre de jetons restant dans le sac est inférieur au nombre de jetons que le joueur doit piocher,
-   on transfère donc l'intégralité du sac dans le chevalet du joueur  */
+         /* le cas qu'il reste est si le nombre de jetons restant dans le sac est inférieur au nombre de jetons que le joueur doit piocher,
+            on transfère donc l'intégralité du sac dans le chevalet du joueur  */
 
         for (int i = 0 ; i < s.getTabFreq().length ; i++) {
 
             if (s.getEltTabFreq(i) != 0) {
 
-                s.retire(getEltTabFreq(i));
-      
-                this.chevalet.ajoute(getEltTabFreq(i));
+                s.transfere(this.chevalet,i);
             }
         }
 
