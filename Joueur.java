@@ -73,13 +73,13 @@ public class Joueur {
 /* le cas qu'il reste est si le nombre de jetons restant dans le sac est inférieur au nombre de jetons que le joueur doit piocher,
    on transfère donc l'intégralité du sac dans le chevalet du joueur  */
 
-        for (int i = 0 ; i < s. ; i++) {
+        for (int i = 0 ; i < s.getTabFreq().length ; i++) {
 
-            if (s.tabFreq[i] != 0) {
+            if (s.getEltTabFreq(i) != 0) {
 
-                s.retire(tabFreq[i]);
+                s.retire(getEltTabFreq(i));
       
-                this.chevalet.ajoute(tabFreq[i]);
+                this.chevalet.ajoute(getEltTabFreq(i));
             }
         }
 
