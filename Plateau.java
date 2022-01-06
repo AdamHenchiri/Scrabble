@@ -136,11 +136,11 @@ public class Plateau {
         while (i < mot.length() && test == false) {
             if ((sens == 'h') && this.g[numLig][i + numCol].estRecouvert() == false) {
                 // System.out.println(Ut.majToIndex(mot.charAt(i)));
-                test = !(e1.getTabFreq(Ut.majToIndex(mot.charAt(i))) > 0);
+                test = !(e1.getEltTabFreq(Ut.majToIndex(mot.charAt(i))) > 0);
                 e1.retire(Ut.majToIndex(mot.charAt(i)));
             } else if ((sens == 'v') && (this.g[i + numLig][numCol].estRecouvert()) == false) {
                 // System.out.println((mot.charAt(i)));
-                test = !(e1.getTabFreq(Ut.majToIndex(mot.charAt(i))) > 0);
+                test = !(e1.getEltTabFreq(Ut.majToIndex(mot.charAt(i))) > 0);
                 e1.retire(Ut.majToIndex(mot.charAt(i)));
             }
             i++;
