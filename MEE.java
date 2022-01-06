@@ -54,7 +54,7 @@ public class MEE {
         this.nbTotEx = 0;
         // On copie les éléments de e dans this
         for (int i = 0; i < e.tabFreq.length; i++) {
-            this.tabFreq[i] = e.getTabFreq(i);
+            this.tabFreq[i] = e.getEltTabFreq(i);
         }
         this.nbTotEx = e.getNbTotEx();
     }
