@@ -72,7 +72,7 @@ public class MEE {
     public int [] getTabFreq() {
         return this.tabFreq;
     }
-    //retourne l'elemnt i de TabFreq
+    //retourne l'element i de TabFreq
     public int getEltTabFreq(int i){
         return this.tabFreq[i];
     }
