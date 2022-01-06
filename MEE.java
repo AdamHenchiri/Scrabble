@@ -69,7 +69,7 @@ public class MEE {
         return this.nbTotEx;
     }
 
-    public int getTabFreq() {
+    public int [] getTabFreq() {
         return this.tabFreq;
     }
     //retourne l'elemnt i de TabFreq
