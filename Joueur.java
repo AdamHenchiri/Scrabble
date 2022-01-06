@@ -87,6 +87,10 @@ public class Joueur {
         int resultat=2;
         int nbJetEchange=0;
         char lettreChange='\0';
+        String motjoue = "";
+        int numerocol = 0;
+        int numeroli = 0;
+        char sens = 's';
         do{
             System.out.println("veillez choisir votre reponse ");
             System.out.println("E pour ECHANGER un ou plusieurs jeton/s..");
@@ -105,10 +109,29 @@ public class Joueur {
                 this.chevalet.transfere(s,Ut.majToIndex(lettreChange));
                 }
                 this.prendJetons(s,nbJetEchange);
+
                 resultat=0;
         }
-        else if (reponse=='J'){
-            
-        }
+        else if (reponse=='P') {
+                 
+                    resultat = -1;
+                }          
+             
+        else if (reponse=='J') {
+                do {
+                System.out.println("saisir le mot que vous souhaitez jouer !");
+                motjoue=Ut.saisirChaine();
+                System.out.println("saisir le numéro de la colonne de votre première lettre !");
+                numerocol = Ut.saisirEntier();
+                System.out.println("saisir le numéro de la ligne de votre première lettre !");
+                numeroli = Ut.saisirEntier();
+                System.out.println("donner le sens de votre mot !");
+                sens = Ut.saisirCaractere();
+
+                while (!(placementValide(motjoue,numeroli,numerocol,sens,this.chevalet)))    
+
+
+                }
+        }     
     }
 }
