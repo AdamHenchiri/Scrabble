@@ -22,21 +22,18 @@ public class Joueur {
         return this.score;
     }
 
-    @Override
-    public String toString() {
-
-        return "{" +
-        " nom='" + getNom() + "'" +
-        ", chevalet='" + getChevalet() + "'" +
-        ", score='" + getScore() + "'" +
-        "}";
+    public String getNom(){
+        return this.nom;
     }
 
     public void ajouteScore(int nb) {
 
         this.score = this.score + nb;
     }
-
+    
+    public void setScore(int scr){
+        this.score=scr;
+    }
     /*
      * pré-requis : nbPointsJet indique le nombre de points rapportés par chaque
      * jeton/lettre
@@ -104,7 +101,7 @@ public class Joueur {
         }
         else if (reponse=='P') { 
 
-            resultat = -1
+            resultat = -1 ;
         }          
 
         else if (reponse=='J') {
@@ -116,12 +113,13 @@ public class Joueur {
         return resultat;
     }
 
-    public int joueMot(Plateau p, MEE s, int[] nbPointsJet) {
+    public boolean joueMot(Plateau p, MEE s, int[] nbPointsJet) {
 
         String motjoue = "";
         int numCol = 0;
         int numLig = 0;
-        char sens = 'sens';
+        char sens = '\0';
+        boolean test=false;
 
         do {
             System.out.println("saisir le mot que vous souhaitez jouer !");
@@ -132,11 +130,10 @@ public class Joueur {
             numLig = Ut.saisirEntier();
             System.out.println("donner le sens de votre mot !");
             sens = Ut.saisirCaractere();
-
+            test=(p.placementValide(motjoue,numLig,numCol,sens,s));
         }while(!(p.placementValide(motjoue,numLig,numCol,sens,s)));
-
         joueMotAux(p,s,nbPointsJet,motjoue,numLig,numCol,sens);
-
+        return test;
     }
 
     public void joueMotAux(Plateau p, MEE s, int[] nbPointsJet, String mot,int numLig, int numCol, char sens) {
@@ -156,7 +153,7 @@ public class Joueur {
 
         for (i = 0 ; i < mot.length() ; i++ ) {
 
-            if (estUneMaj(mot.charAt(i))) {
+            if (Ut.estUneMaj(mot.charAt(i))) {
 
                 while (res == false) {
 

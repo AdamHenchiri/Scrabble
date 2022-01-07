@@ -19,7 +19,8 @@ public class Scrabble {
 
     @Override
     public String toString() {
-        String affiche=plateau.toString()+"\n"+"c'est au tour du joueur "+ joueurs[numJoueur].getNom();
+        int nJ=Ut.randomMinMax(1, numJoueur);
+        String affiche=plateau.toString()+"\n"+"c'est au tour du joueur "+ joueurs[nJ].getNom();
         return affiche;
     }
     public void partie (){
@@ -33,7 +34,7 @@ public class Scrabble {
             win+=this.joueurs[numJoueur].getNom();
             for (int i=0;i<joueurs.length;i++){
                 if (i!=numJoueur){
-                    this.joueurs[numJoueur].setScore(this.joueurs[numJoueur].getScore()+joueurs[i].getChevalet().sommeValeurs(joueurs[i].getChevalet().getTabFreq(i)));
+                    this.joueurs[numJoueur].setScore(this.joueurs[numJoueur].getScore() + joueurs[i].getChevalet().sommeValeurs(joueurs[i].getChevalet().getTabFreq()));
                 }
             }
         }
