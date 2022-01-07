@@ -58,14 +58,15 @@ public class Joueur {
         int nbExampTransfer = 0;
         if ((s.getNbTotEx() > nbJetons)) {
             while ((nbJetons != 0)) {
-
+                
                 s.transfereAleat(this.chevalet, nbJetons);
-
+                
                 nbExampTransfer = s.transfereAleat(this.chevalet, nbJetons);
-
+                
                 nbJetons = nbJetons - nbExampTransfer;
-
+                
             }
+            
         }
         /*
          * le cas qu'il reste est si le nombre de jetons restant dans le sac est
@@ -99,7 +100,7 @@ public class Joueur {
         } while (!(reponse != 'E' || reponse != 'P' || reponse != 'J'));
 
         if (reponse == 'E') {
-
+            this.echangeJetons(s);
             resultat = 0;
         } else if (reponse == 'P') {
 
@@ -109,7 +110,7 @@ public class Joueur {
         else if (reponse == 'J') {
             resultat = 1;
             while (!(joueMot(p, s, nbPointsJet))) {
-                joueMot(p,s,nbPointsJet);
+                joueMot(p, s, nbPointsJet);
             }
         }
 
@@ -133,14 +134,14 @@ public class Joueur {
         System.out.println("donner le sens de votre mot !");
         sens = Ut.saisirCaractere();
         test = (p.placementValide(motjoue, numLig, numCol, sens, s));
-        if (test){
-            joueMotAux(p,s,nbPointsJet,motjoue,numLig,numCol,sens);
+        if (test) {
+            joueMotAux(p, s, nbPointsJet, motjoue, numLig, numCol, sens);
         }
         return test;
     }
 
     public void joueMotAux(Plateau p, MEE s, int[] nbPointsJet, String mot, int numLig, int numCol, char sens) {
-            p.place(mot, numLig, numCol, sens, s);
+        p.place(mot, numLig, numCol, sens, s);
     }
 
     public boolean estCorrectPourEchange(String mot) {
@@ -198,11 +199,15 @@ public class Joueur {
 
         }
     }
-   /* public static void main(String[] args) {
-        int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6, 6, 6, 2, 1, 1, 1, 1 };
-        MEE sac=new MEE(sacdebase);
-        int[] tab = { 7, 6, 4, 4, 16, 8, 3, 1, 3, 4, 1, 2, 2, 1, 4, 3, 8, 4, 1, 3, 2, 5, 0, 0, 1, 1 };
-        MEE meeP1 = new MEE(tab);
-        meeP1.prendJetons(sac,7);
-    }*/
+    /*
+     * public static void main(String[] args) {
+     * int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6,
+     * 6, 6, 2, 1, 1, 1, 1 };
+     * MEE sac=new MEE(sacdebase);
+     * int[] tab = { 7, 6, 4, 4, 16, 8, 3, 1, 3, 4, 1, 2, 2, 1, 4, 3, 8, 4, 1, 3, 2,
+     * 5, 0, 0, 1, 1 };
+     * MEE meeP1 = new MEE(tab);
+     * meeP1.prendJetons(sac,7);
+     * }
+     */
 }

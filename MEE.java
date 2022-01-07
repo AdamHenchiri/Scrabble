@@ -194,6 +194,7 @@ public int transfereAleat(MEE e, int k) {
     int resultat=0;
     while(index<=k){
         choix=Ut.randomMinMax(0,(this.tabFreq.length-1));
+        System.out.println(choix);
         if(this.transfere(e, choix)){
             resultat++;
         }

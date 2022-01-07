@@ -28,9 +28,13 @@ public class Scrabble {
         for (int i=0;i<joueurs.length;i++){
         this.joueurs[i].prendJetons(sac, 7);
         }
+        System.out.print("voici votre chevalet ");
         for (int i=0;i<joueurs[numJoueur].getChevalet().getTabFreq().length;i++){
-        System.out.print(this.joueurs[numJoueur].getChevalet().getEltChevalet(i));
+            if (this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)!=0){
+            System.out.print(Ut.indexToMaj(this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)));
+            }
         }
+        System.out.println("\n");
         this.joueurs[numJoueur].joue(plateau, sac, nbPointsJet);
 
     }
