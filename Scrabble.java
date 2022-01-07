@@ -4,14 +4,14 @@ public class Scrabble {
     private Plateau plateau;
     private MEE sac;
     ////////////////////////////////////// A. B. C. D. E. F. G. H. I.  J.  K. L. M. N. O. P. Q. R. S. T. U. V.  W.  X.  Y.  Z
-    private static int[] nbPointsJeton = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 10, 10, 1, 2, 1, 1, 3, 8, 1, 1, 1, 1, 4, 10, 10, 10, 10 };
+     public static int[] nbPointsJeton = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 10, 10, 1, 2, 1, 1, 3, 8, 1, 1, 1, 1, 4, 10, 10, 10, 10 };
 
     public Scrabble(String[] tabNomJ ) {
         this.joueurs=new Joueur[tabNomJ.length];
             for (int i=0;i<tabNomJ.length;i++){
             this.joueurs[i]= new Joueur (tabNomJ[i]);
             }
-        this.numJoueur=Ut.randomMinMax(0, tabNomJ.length);
+        this.numJoueur=Ut.randomMinMax(0, tabNomJ.length-1);
         this.plateau = new Plateau();
         int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6, 6, 6, 2, 1, 1, 1, 1 };
         this.sac=new MEE(sacdebase);
@@ -19,13 +19,19 @@ public class Scrabble {
 
     @Override
     public String toString() {
-        int nJ=Ut.randomMinMax(1, numJoueur);
-        String affiche=plateau.toString()+"\n"+"c'est au tour du joueur "+ joueurs[nJ].getNom();
+        String affiche=plateau.toString()+"\n"+"c'est au tour du joueur "+ joueurs[numJoueur].getNom();
+        this.partie(sac, plateau, nbPointsJeton);
         return affiche;
     }
-    public void partie (){
 
-        this.joueurs[numJoueur].getChevalet();
+    public void partie (MEE sac,Plateau plateau,int[] nbPointsJet){
+        for (int i=0;i<joueurs.length;i++){
+        this.joueurs[i].prendJetons(sac, 7);
+        }
+        for (int i=0;i<joueurs[numJoueur].getChevalet().getTabFreq().length;i++){
+        System.out.print(this.joueurs[numJoueur].getChevalet().getEltChevalet(i));
+        }
+        this.joueurs[numJoueur].joue(plateau, sac, nbPointsJet);
 
     }
     public String winner(){
