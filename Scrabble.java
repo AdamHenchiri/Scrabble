@@ -31,7 +31,7 @@ public class Scrabble {
         System.out.print("voici votre chevalet ");
         for (int i=0;i<joueurs[numJoueur].getChevalet().getTabFreq().length;i++){
             if (this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)!=0){
-            System.out.print(Ut.indexToMaj(this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)));
+            System.out.print(Ut.indexToMaj(i));
             }
         }
         System.out.println("\n");

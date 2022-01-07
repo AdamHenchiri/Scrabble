@@ -59,12 +59,13 @@ public class Joueur {
         if ((s.getNbTotEx() > nbJetons)) {
             while ((nbJetons != 0)) {
                 
-                s.transfereAleat(this.chevalet, nbJetons);
                 
                 nbExampTransfer = s.transfereAleat(this.chevalet, nbJetons);
+                //System.out.println(nbJetons+"nbJetons");
+                //System.out.println(nbExampTransfer+"nbExampTransfer");
                 
                 nbJetons = nbJetons - nbExampTransfer;
-                
+                //System.out.println(nbJetons);
             }
             
         }
