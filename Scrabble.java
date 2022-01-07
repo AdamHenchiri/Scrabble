@@ -15,15 +15,16 @@ public class Scrabble {
             int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6, 6, 6, 2, 1, 1, 1, 1 };
             this.sac=new MEE(sacdebase);
         this.numJoueur=Ut.randomMinMax(0, tabNomJ.length-1);
-        this.toString();
+        System.out.println( this.toString()); 
         this.partie(sac, plateau, nbPointsJeton);
-
+        
     }
 
     @Override
     public String toString() {
-        String affiche=plateau.toString()+"\n";
+        String affiche=plateau.toString()+"\n"+"c'est au tour du joueur "+ joueurs[numJoueur].getNom();
         //this.partie(sac, plateau, nbPointsJeton);
+       
         return affiche;
     }
 
@@ -31,7 +32,6 @@ public class Scrabble {
         for (int i=0;i<joueurs.length;i++){
         this.joueurs[i].prendJetons(sac, 7);
         }
-        System.out.println("c'est au tour du joueur "+ joueurs[numJoueur].getNom());
         System.out.print("voici votre chevalet ");
         for (int i=0;i<joueurs[numJoueur].getChevalet().getTabFreq().length;i++){
             if (this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)!=0){
