@@ -82,14 +82,16 @@ public class Scrabble {
             System.out.println("partie terminee!!");
             //affichage du ou des gagnants
             String win="and the winner issss ";
-            int numV=numJoueur;
+            int numV=0;
             // cas de terminaison (rare)
             if (terminer1){
              for (int i = 0 ; i < this.joueurs.length ; i++) {
-                 this.joueurs[i].ajouteScore(this.joueurs[i].nbPointsChevalet( this.joueurs[i].getChevalet().getTabFreq()) * -1);
+                // System.out.println(this.joueurs[i].nbPointsChevalet( this.joueurs[i].getChevalet().getTabFreq()) );
+                this.joueurs[i].ajouteScore(this.joueurs[i].nbPointsChevalet(nbPointsJet) * -1);
              }
             int max=joueurs[0].getScore();
             String nomV=joueurs[0].getNom();
+            numV=0;
             for (int i=1;i<this.joueurs.length;i++){
                 if (max<joueurs[i].getScore()){
                     max=joueurs[i].getScore();
@@ -108,7 +110,7 @@ public class Scrabble {
                 }
                     for (int i=0;i<joueurs.length;i++){
                         if (i != numJoueur){
-                            this.joueurs[numJoueur].setScore(this.joueurs[numJoueur].getScore() + joueurs[i].getChevalet().sommeValeurs(joueurs[i].getChevalet().getTabFreq()));
+                            this.joueurs[numJoueur].ajouteScore(joueurs[i].getChevalet().sommeValeurs(joueurs[i].getChevalet().getTabFreq()));
                         }
                     }
                 win+="Avec le score de "+joueurs[numJoueur].getScore()+" "+joueurs[numJoueur].getNom();
@@ -121,9 +123,9 @@ public class Scrabble {
                 }
             }*/
             for (int i=0;i<this.joueurs.length;i++){
-                // System.out.println(joueurs[i].getScore());
-               // System.out.println(numV);
-               // System.out.println(joueurs[numV].getScore());
+                System.out.println(joueurs[i].getScore());
+                System.out.println(numV);
+                System.out.println(joueurs[numV].getScore());
 
                 if (i!=numV && joueurs[i].getScore()==joueurs[numV].getScore()){
                     win+=", "+joueurs[i].getNom();
