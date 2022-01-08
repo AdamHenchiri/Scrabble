@@ -14,7 +14,7 @@ public class Scrabble {
             this.plateau = new Plateau();
             //int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6, 6, 6, 2, 1, 1, 1, 1 };
                             //{ 1, 3, 3, 2, 1, 4, 2, 4, 1, 10, 10, 1, 2, 1, 1, 3, 8, 1, 1, 1, 1, 4, 10, 10, 10, 10 }
-            int[] sacdebase = { 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 2, 0, 1, 2, 0, 0, 1, 2, 1, 1, 0, 0, 0, 0, 0 };
+            int[] sacdebase = { 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 1, 2, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0 };
             this.sac=new MEE(sacdebase);
         this.numJoueur=Ut.randomMinMax(0, tabNomJ.length-1); 
         this.partie(sac, plateau, nbPointsJeton);
@@ -67,13 +67,6 @@ public class Scrabble {
                 x=0;
             }
             terminer1= x==joueurs.length ;
-            
-            if (terminer1 == true) {
-                
-                for (int i = 0 ; i < this.joueurs.length ; i++) {
-                    this.joueurs[numJoueur].ajouteScore(this.joueurs[numJoueur].nbPointsChevalet( this.joueurs[numJoueur].getChevalet().getTabFreq())*-1);
-                }
-            }
             //pour terminer une partie 2
             terminer2= joueurs[numJoueur].getChevalet().getNbTotEx()==0 ;
             //
@@ -87,9 +80,14 @@ public class Scrabble {
                 }
             }
             System.out.println("partie terminee!!");
+            //affichage du ou des gagnants
             String win="and the winner issss ";
             int numV=numJoueur;
+            // cas de terminaison (rare)
             if (terminer1){
+             for (int i = 0 ; i < this.joueurs.length ; i++) {
+                 this.joueurs[i].ajouteScore(this.joueurs[i].nbPointsChevalet( this.joueurs[i].getChevalet().getTabFreq()) * -1);
+             }
             int max=joueurs[0].getScore();
             String nomV=joueurs[0].getNom();
             for (int i=1;i<this.joueurs.length;i++){
@@ -101,7 +99,8 @@ public class Scrabble {
             }
 
             win+="Avec le score de "+max+" est "+nomV; 
-            }else if (terminer2){
+            }// cas de terminaison classic
+            else if (terminer2){
                 if (this.numJoueur==0){
                     this.numJoueur=joueurs.length-1;
                 }else {
@@ -112,19 +111,19 @@ public class Scrabble {
                             this.joueurs[numJoueur].setScore(this.joueurs[numJoueur].getScore() + joueurs[i].getChevalet().sommeValeurs(joueurs[i].getChevalet().getTabFreq()));
                         }
                     }
-                win+="Avec le score de "+joueurs[numJoueur].getScore()+" est "+joueurs[numJoueur].getNom();
+                win+="Avec le score de "+joueurs[numJoueur].getScore()+" "+joueurs[numJoueur].getNom();
                 numV=numJoueur;
             }  
-            int max=joueurs[0].getScore();
+            /*int max=joueurs[0].getScore();
             for (int i=1;i<this.joueurs.length;i++){
                 if (max<joueurs[i].getScore()){
                     max=joueurs[i].getScore();
                 }
-            }
+            }*/
             for (int i=0;i<this.joueurs.length;i++){
-                System.out.println(numV);
-                System.out.println(joueurs[numV].getScore());
-                System.out.println(joueurs[i].getScore());
+                // System.out.println(joueurs[i].getScore());
+               // System.out.println(numV);
+               // System.out.println(joueurs[numV].getScore());
 
                 if (i!=numV && joueurs[i].getScore()==joueurs[numV].getScore()){
                     win+=", "+joueurs[i].getNom();

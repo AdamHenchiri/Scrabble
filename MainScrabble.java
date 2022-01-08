@@ -11,8 +11,5 @@ public class  MainScrabble{
             tabNomJ[i]=Ut.saisirChaine();
         }
         Scrabble partie =new Scrabble (tabNomJ);
-        //System.out.println(partie.toString());
-        
-
     }
 }
