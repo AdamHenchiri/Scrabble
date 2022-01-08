@@ -82,7 +82,7 @@ public class Joueur {
                 }
             }
         } else {
-            System.out.println("Erreur: sac vide !!");
+            System.out.println("sac vide !!");
         }
     }
 
@@ -211,15 +211,4 @@ public class Joueur {
 
         }
     }
-    /*
-     * public static void main(String[] args) {
-     * int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6,
-     * 6, 6, 2, 1, 1, 1, 1 };
-     * MEE sac=new MEE(sacdebase);
-     * int[] tab = { 7, 6, 4, 4, 16, 8, 3, 1, 3, 4, 1, 2, 2, 1, 4, 3, 8, 4, 1, 3, 2,
-     * 5, 0, 0, 1, 1 };
-     * MEE meeP1 = new MEE(tab);
-     * meeP1.prendJetons(sac,7);
-     * }
-     */
 }
