@@ -12,9 +12,9 @@ public class Scrabble {
             this.joueurs[i]= new Joueur (tabNomJ[i]);
             }
             this.plateau = new Plateau();
-            //int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6, 6, 6, 2, 1, 1, 1, 1 };
+            int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6, 6, 6, 2, 1, 1, 1, 1 };
                             //{ 1, 3, 3, 2, 1, 4, 2, 4, 1, 10, 10, 1, 2, 1, 1, 3, 8, 1, 1, 1, 1, 4, 10, 10, 10, 10 }
-            int[] sacdebase = { 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 1, 2, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0 };
+            //int[] sacdebase = { 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 1, 2, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0 };
             this.sac=new MEE(sacdebase);
         this.numJoueur=Ut.randomMinMax(0, tabNomJ.length-1); 
         this.partie(sac, plateau, nbPointsJeton);
@@ -57,9 +57,15 @@ public class Scrabble {
             System.out.println("]"+"\n");
             repJ=this.joueurs[numJoueur].joue(plateau, sac, nbPointsJet);
             //la reprise de jetons apres avoir jouer un mot 
-            if (this.joueurs[numJoueur].getChevalet().getNbTotEx()<7){
-                this.joueurs[numJoueur].prendJetons(sac, 7-this.joueurs[numJoueur].getChevalet().getNbTotEx());
+            int nbrReprisejet=7-this.joueurs[numJoueur].getChevalet().getNbTotEx();
+            //en cas de scrabble le joueurs prend un bonus de 50 points
+            if (nbrReprisejet==7){
+                this.joueurs[numJoueur].ajouteScore(50)  ;
             }
+            if (this.joueurs[numJoueur].getChevalet().getNbTotEx()<7){
+                this.joueurs[numJoueur].prendJetons(sac, nbrReprisejet);
+            }
+            System.out.println("bravo votre mot a bien été placé , nbr de point "+this.joueurs[numJoueur].getScore());
             //pour terminer une partie 1
             if (repJ==-1){
                 x++;

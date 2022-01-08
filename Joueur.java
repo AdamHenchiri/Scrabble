@@ -151,12 +151,7 @@ public class Joueur {
     public void joueMotAux(Plateau p, MEE s, int[] nbPointsJet, String mot, int numLig, int numCol, char sens) {
         p.place(mot, numLig, numCol, sens, s);
         int nbp=p.nbPointsPlacement(mot, numLig, numCol, sens, nbPointsJet);
-        //en cas de scrabble le joueurs prend un bonus de 50 points
         this.score+=nbp;
-        if (mot.length()==7){
-            this.score+=50;
-        }
-        System.out.println("bravo votre mot a bien été placé , nbr de point "+this.score);
     }
 
     public boolean estCorrectPourEchange(String mot) {

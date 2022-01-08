@@ -10,6 +10,6 @@ public class  MainScrabble{
             System.out.println("veillez saisir le nom du joueur num "+(i+1));
             tabNomJ[i]=Ut.saisirChaine();
         }
-        Scrabble partie =new Scrabble (tabNomJ);
+       new Scrabble (tabNomJ);
     }
 }
