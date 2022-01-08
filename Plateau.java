@@ -100,7 +100,7 @@ public class Plateau {
             }
         }
         if (test == false) {
-            System.out.println("ERREUR::ce mot est placé dans un autre");
+            System.out.println("ERREUR::ce mot est place dans un autre");
         }
         return test;
     }
@@ -122,7 +122,7 @@ public class Plateau {
         }
         if (test == false) {
             System.out
-                    .println("ERREUR::les lettres de ce mot qui sont deja placé sur le plateau ne correspondent pas ");
+                    .println("ERREUR::les lettres de ce mot qui sont deja place sur le plateau ne correspondent pas ");
         }
         return test;
     }
@@ -239,7 +239,7 @@ public class Plateau {
 
         }
        }else if (repCapelo=='N'){
-           System.out.println("ERREUR::le mot n'est pas validé par CapeloDico!");
+           System.out.println("ERREUR::le mot n'est pas valide par CapeloDico!");
        }
         // System.out.println (test1);
         // System.out.println(test2);

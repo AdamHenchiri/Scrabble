@@ -1,4 +1,5 @@
 public class Case {
+    
     private int couleur;
     private char letter;
 

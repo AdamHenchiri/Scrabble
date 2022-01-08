@@ -67,6 +67,14 @@ public class Scrabble {
             }
             terminer1= x==joueurs.length ;
             //pour terminer une partie 2
+
+            if (terminer1 == true) {
+
+                for (int i = 0 ; i < this.joueurs.length ; i++) {
+
+                    this.joueurs[numJoueur].getScore().ajouteScore(nbPointsChevalet( this.joueurs[numJoueur].getChevalet())*(-1));
+                }
+            }
             terminer2= joueurs[numJoueur].getChevalet().getNbTotEx()==0 ;
             //
             terminer=terminer1||terminer2;  
@@ -78,7 +86,7 @@ public class Scrabble {
                     this.numJoueur++;
                 }
             }
-            System.out.println("partie terminée!!");
+            System.out.println("partie terminee!!");
             System.out.println(winner());           
     }
 
