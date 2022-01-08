@@ -111,7 +111,8 @@ public class Joueur {
         else if (reponse == 'J') {
             resultat = 1;
             while (!(joueMot(p, s, nbPointsJet))) {
-                joueMot(p, s, nbPointsJet);
+               // System.out.println("placement NON valide");
+               // joueMot(p, s, nbPointsJet);
             }
         }
 
@@ -132,11 +133,12 @@ public class Joueur {
         numCol = Ut.saisirEntier();
         System.out.println("saisir le numéro de la ligne de votre première lettre !");
         numLig = Ut.saisirEntier();
-        System.out.println("donner le sens de votre mot !");
+        System.out.println("donner le sens de votre mot v/h...");
         sens = Ut.saisirCaractere();
-        test = (p.placementValide(motjoue, numLig, numCol, sens, s));
+        System.out.println(motjoue + numLig + numCol + sens);
+        test = (p.placementValide(motjoue, numLig-1, numCol-1, sens, chevalet));
         if (test) {
-            joueMotAux(p, s, nbPointsJet, motjoue, numLig, numCol, sens);
+            joueMotAux(p, chevalet, nbPointsJet, motjoue, numLig-1, numCol-1, sens);
         }
         return test;
     }

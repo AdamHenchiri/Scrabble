@@ -14,8 +14,7 @@ public class Scrabble {
             this.plateau = new Plateau();
             int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6, 6, 6, 2, 1, 1, 1, 1 };
             this.sac=new MEE(sacdebase);
-        this.numJoueur=Ut.randomMinMax(0, tabNomJ.length-1);
-        System.out.println( this.toString()); 
+        this.numJoueur=Ut.randomMinMax(0, tabNomJ.length-1); 
         this.partie(sac, plateau, nbPointsJeton);
         
     }
@@ -29,19 +28,50 @@ public class Scrabble {
     }
 
     public void partie (MEE sac,Plateau plateau,int[] nbPointsJet){
+        boolean terminer=false;
+        int repJ=2;
+        int x=0;
         for (int i=0;i<joueurs.length;i++){
-        this.joueurs[i].prendJetons(sac, 7);
+            this.joueurs[i].prendJetons(sac, 7);
         }
-        System.out.print("voici votre chevalet ");
-        for (int i=0;i<joueurs[numJoueur].getChevalet().getTabFreq().length;i++){
-            if (this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)!=0){
-            System.out.print(Ut.indexToMaj(i));
+        while (!(terminer)) {
+            System.out.println( this.toString());
+            //affichage du chevalet du joueur 
+            System.out.print("voici votre chevalet [");
+            for (int i=0;i<joueurs[numJoueur].getChevalet().getTabFreq().length;i++){
+                if (this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)==1){
+                    System.out.print(Ut.indexToMaj(i)+",");
+                }else if (this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)>1){
+                    int xx=0;
+                        while (this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)!=xx){
+                        System.out.print(Ut.indexToMaj(i)+",");
+                        xx++;
+                        }
+                    }
+                
             }
-        }
-        System.out.println("\n");
-        this.joueurs[numJoueur].joue(plateau, sac, nbPointsJet);
-
+            System.out.println("]"+"\n");
+            repJ=this.joueurs[numJoueur].joue(plateau, sac, nbPointsJet);
+            //pour terminer une partie 1
+            if (repJ==-1){
+                x++;
+            }else{
+                x=0;
+            }
+            //pour terminer une partie 2
+            terminer=joueurs[numJoueur].getChevalet().getNbTotEx()==0 || x==joueurs.length;
+            //pour changer de joueur
+                if (this.numJoueur==joueurs.length-1){
+                    this.numJoueur=0;
+                }
+                else {
+                    this.numJoueur++;
+                }
+            }
+            System.out.println("partie terminée!!");
+               //System.out.println(winner());           
     }
+
     public String winner(){
         String win="and the winner issss ";
         if (this.joueurs[numJoueur].getChevalet().getNbTotEx()==0 && this.sac.getNbTotEx()==0){
