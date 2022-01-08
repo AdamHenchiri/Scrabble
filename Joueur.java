@@ -130,11 +130,11 @@ public class Joueur {
         System.out.println("saisir le mot que vous souhaitez jouer !");
         motjoue = Ut.saisirChaine();
         do{
-        System.out.println("saisir le numéro de la ligne de votre première lettre !");
+        System.out.println("saisir le numero de la ligne de votre premiere lettre !");
         numLig = Ut.saisirEntier();
         }while(numLig<1 || numLig>15);
         do {
-        System.out.println("saisir le numéro de la colonne de votre première lettre !");
+        System.out.println("saisir le numero de la colonne de votre premiere lettre !");
         numCol = Ut.saisirEntier();
         }while (numCol<1 || numCol>15);
         do{
