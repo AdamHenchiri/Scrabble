@@ -154,7 +154,7 @@ public class Plateau {
     public boolean placementValide(String mot, int numLig, int numCol, char sens, MEE e) {
         char repCapelo='\0';
         boolean pasvide = this.g[7][7].estRecouvert();
-         System.out.println(pasvide);
+        //System.out.println(pasvide);
         boolean test = false;
         boolean test1 = false;
         boolean test2 = false;

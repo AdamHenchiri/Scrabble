@@ -13,6 +13,7 @@ public class Scrabble {
             }
             this.plateau = new Plateau();
             int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6, 6, 6, 2, 1, 1, 1, 1 };
+            //int[] sacdebase = { 2, 1, 1, 1, 2, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 2, 1, 0, 0, 0, 0, 0, 0 };
             this.sac=new MEE(sacdebase);
         this.numJoueur=Ut.randomMinMax(0, tabNomJ.length-1); 
         this.partie(sac, plateau, nbPointsJeton);
@@ -29,6 +30,8 @@ public class Scrabble {
 
     public void partie (MEE sac,Plateau plateau,int[] nbPointsJet){
         boolean terminer=false;
+        boolean terminer1=false;
+        boolean terminer2=false;
         int repJ=2;
         int x=0;
         for (int i=0;i<joueurs.length;i++){
@@ -43,23 +46,30 @@ public class Scrabble {
                     System.out.print(Ut.indexToMaj(i)+",");
                 }else if (this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)>1){
                     int xx=0;
-                        while (this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)!=xx){
+                    while (this.joueurs[numJoueur].getChevalet().getEltTabFreq(i)!=xx){
                         System.out.print(Ut.indexToMaj(i)+",");
                         xx++;
-                        }
                     }
+                }
                 
             }
             System.out.println("]"+"\n");
             repJ=this.joueurs[numJoueur].joue(plateau, sac, nbPointsJet);
+            //la reprise de jetons apres avoir jouer un mot 
+            if (this.joueurs[numJoueur].getChevalet().getNbTotEx()<7){
+                this.joueurs[numJoueur].prendJetons(sac, 7-this.joueurs[numJoueur].getChevalet().getNbTotEx());
+            }
             //pour terminer une partie 1
             if (repJ==-1){
                 x++;
             }else{
                 x=0;
             }
+            terminer1= x==joueurs.length ;
             //pour terminer une partie 2
-            terminer=joueurs[numJoueur].getChevalet().getNbTotEx()==0 || x==joueurs.length;
+            terminer2= joueurs[numJoueur].getChevalet().getNbTotEx()==0 ;
+            //
+            terminer=terminer1||terminer2;  
             //pour changer de joueur
                 if (this.numJoueur==joueurs.length-1){
                     this.numJoueur=0;
@@ -69,19 +79,22 @@ public class Scrabble {
                 }
             }
             System.out.println("partie terminée!!");
-               //System.out.println(winner());           
+            System.out.println(winner());           
     }
 
     public String winner(){
         String win="and the winner issss ";
-        if (this.joueurs[numJoueur].getChevalet().getNbTotEx()==0 && this.sac.getNbTotEx()==0){
-            win+=this.joueurs[numJoueur].getNom();
-            for (int i=0;i<joueurs.length;i++){
+        if (this.numJoueur==0){
+            this.numJoueur=joueurs.length-1;
+        }else {
+            this.numJoueur--;
+        }
+        win+=this.joueurs[numJoueur].getNom()+" avec le score de "+this.joueurs[numJoueur].getScore();
+            /*for (int i=0;i<joueurs.length;i++){
                 if (i!=numJoueur){
                     this.joueurs[numJoueur].setScore(this.joueurs[numJoueur].getScore() + joueurs[i].getChevalet().sommeValeurs(joueurs[i].getChevalet().getTabFreq()));
                 }
-            }
-        }
+            }*/
         return win ;
     }
 

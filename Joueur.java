@@ -111,7 +111,7 @@ public class Joueur {
         else if (reponse == 'J') {
             resultat = 1;
             while (!(joueMot(p, s, nbPointsJet))) {
-               // System.out.println("placement NON valide");
+                System.out.println("placement NON valide");
                // joueMot(p, s, nbPointsJet);
             }
         }
@@ -129,13 +129,18 @@ public class Joueur {
 
         System.out.println("saisir le mot que vous souhaitez jouer !");
         motjoue = Ut.saisirChaine();
-        System.out.println("saisir le numéro de la colonne de votre première lettre !");
-        numCol = Ut.saisirEntier();
+        do{
         System.out.println("saisir le numéro de la ligne de votre première lettre !");
         numLig = Ut.saisirEntier();
+        }while(numLig<1 || numLig>15);
+        do {
+        System.out.println("saisir le numéro de la colonne de votre première lettre !");
+        numCol = Ut.saisirEntier();
+        }while (numCol<1 || numCol>15);
+        do{
         System.out.println("donner le sens de votre mot v/h...");
         sens = Ut.saisirCaractere();
-        System.out.println(motjoue + numLig + numCol + sens);
+        }while (sens!='h' && sens!='v');
         test = (p.placementValide(motjoue, numLig-1, numCol-1, sens, chevalet));
         if (test) {
             joueMotAux(p, chevalet, nbPointsJet, motjoue, numLig-1, numCol-1, sens);
@@ -145,6 +150,9 @@ public class Joueur {
 
     public void joueMotAux(Plateau p, MEE s, int[] nbPointsJet, String mot, int numLig, int numCol, char sens) {
         p.place(mot, numLig, numCol, sens, s);
+        int nbp=p.nbPointsPlacement(mot, numLig, numCol, sens, nbPointsJet);
+        this.score+=nbp;
+        System.out.println("bravo votre mot a bien été placé , nbr de point "+nbp);
     }
 
     public boolean estCorrectPourEchange(String mot) {
@@ -173,12 +181,13 @@ public class Joueur {
 
         int nbJetEchange = 0;
 
-        do {
+        /*do {
             System.out.println("combien de lettre voulez vous echanger ?");
 
             nbJetEchange = Ut.saisirEntier();
 
-        } while (nbJetEchange < 1 || nbJetEchange > 7);
+        } while (nbJetEchange < 1 || nbJetEchange > 7);*/
+        nbJetEchange=ensJetons.length();
 
         this.prendJetons(sac, nbJetEchange);
 
