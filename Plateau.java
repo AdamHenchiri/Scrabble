@@ -36,19 +36,20 @@ public class Plateau {
 
     @Override
     public String toString() {
-        String res = "  .1.2.3.4.5.6.7.8.7.6.5.4.3.2.1." + "\n" + "  _______________________________" + "\n";
+                    
+        String res = "  .01.02.03.04.05.06.07.08.09.10.11.12.13.14.15." + "\n" + "  _____________________________________________" + "\n";
         for (int i = 0; i < 15; i++) {
-            res += Ut.indexToMaj(i) + " |";
+            res += Ut.indexToMaj(i) + " | ";
             for (int j = 0; j < 15; j++) {
                 if (this.g[i][j].estRecouvert()) {
-                    res += this.g[i][j].getLetter() + "|";
+                    res += this.g[i][j].getLetter() + "| ";
                 } else if (this.g[i][j].getCouleur() != 1) {
-                    res += this.g[i][j].getCouleur() + "|";
+                    res += this.g[i][j].getCouleur() + "| ";
                 } else {
-                    res += " |";
+                    res += " | ";
                 }
             }
-            res += "\n" + "  _______________________________" + "\n";
+            res += "\n" + "  _____________________________________________" + "\n";
 
         }
         String res2 = res.substring(0, res.length() - 1);
