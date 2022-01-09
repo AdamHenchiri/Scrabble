@@ -1,11 +1,9 @@
-README
 
+<strong>EXPLICATIONS :</strong>
 
-EXPLICATIONS :
+Nous avons programmé en programmation orientée objet une partie de <a href="https://fr.wikipedia.org/wiki/Scrabble">Scrabble</a>. Au travers de multiples classes nous sommes parvenus à concevoir un programme qui permet de jouer à ce jeu en prenant en compte l’ensemble des paramètres quels qu’ils soient. Le jeu est conforme au modèle classique à l’exception de l’absence d’extension due à un soucis de temps.
 
-Nous avons programmé en programmation orientée objet une partie de Scrabble. Au travers de multiples classes nous sommes parvenus à concevoir un programme qui permet de jouer à ce jeu en prenant en compte l’ensemble des paramètres quels qu’ils soient. Le jeu est conforme au modèle classique à l’exception de l’absence d’extension due à un soucis de temps.
-
-Notice d’utilisation :
+<strong>Notice d’utilisation :</strong>
 
 Si le terminal employé est powershell :
 
@@ -35,4 +33,4 @@ java MainScrabble
 
 
 
-La partie est à présent lancée, amusez-vous bien !
+<strong><i>La partie est à présent lancée, amusez-vous bien !</i></strong>
