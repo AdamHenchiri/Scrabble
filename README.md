@@ -1,7 +1,7 @@
 
 <strong>EXPLICATIONS :</strong>
 
-Nous avons programmé en programmation orientée objet une partie de <a href="https://fr.wikipedia.org/wiki/Scrabble">Scrabble</a>. Au travers de multiples classes nous sommes parvenus à concevoir un programme qui permet de jouer à ce jeu en prenant en compte l’ensemble des paramètres quels qu’ils soient. Le jeu est conforme au modèle classique à l’exception de l’absence d’extension due à un soucis de temps.
+dans le cadre du projet <a href="https://moodle.umontpellier.fr/pluginfile.php/1121002/mod_folder/content/0/DEVELOPPEMENT%20INITIATIQUE/SAE%20Scrabble/sujet-scrabble.pdf?forcedownload=1">d'SAE 1.01 </a>durant le premier semestre du B.U.T informatique, nous avons programmé en programmation orientée objet une partie de <a href="https://fr.wikipedia.org/wiki/Scrabble">Scrabble</a>. Au travers de multiples classes nous sommes parvenus à concevoir un programme qui permet de jouer à ce jeu en prenant en compte l’ensemble des paramètres quels qu’ils soient. Le jeu est conforme au modèle classique à l’exception de l’absence d’extension due à un soucis de temps.
 
 <strong>Notice d’utilisation :</strong>
 
