@@ -55,6 +55,15 @@ public class Plateau {
         return res2;
     }
 
+    /**
+     * 
+     * @param mot
+     * @param numLig
+     * @param numCol
+     * @param sens
+     * @return true ssi le placement de ce mot est rattacher a un autre sur le
+     *         plateau
+     */
     public boolean contientUneCaseR(String mot, int numLig, int numCol, char sens) {
         Boolean test = false;
         if (sens == 'h') {
@@ -80,6 +89,14 @@ public class Plateau {
         return test;
     }
 
+    /**
+     * 
+     * @param mot
+     * @param numLig
+     * @param numCol
+     * @param sens
+     * @return true ssi le mot a placé n'est pas placé dans un autre
+     */
     public boolean contientUneCaseV(String mot, int numLig, int numCol, char sens) {
         Boolean test = false;
         if (sens == 'h') {
@@ -105,6 +122,15 @@ public class Plateau {
         return test;
     }
 
+    /**
+     * 
+     * @param mot
+     * @param numLig
+     * @param numCol
+     * @param sens
+     * @return true ssi les lettres de ce mot qui sont deja place sur le plateau
+     *         corresponde
+     */
     public boolean mêmelettre(String mot, int numLig, int numCol, char sens) {
         Boolean test = true;
         if (sens == 'h') {
@@ -127,8 +153,16 @@ public class Plateau {
         return test;
     }
 
-    // renvoie true ssi toutes les lettres a placer existe dans le chevalet du
-    // joueur
+    /**
+     * 
+     * @param mot
+     * @param e
+     * @param numLig
+     * @param numCol
+     * @param sens
+     * @return true ssi toutes les lettres a placer existe dans le chevalet du
+     *         joueur
+     */
     public boolean lettreexiste(String mot, MEE e, int numLig, int numCol, char sens) {
         boolean test = false;
         int i = 0;
@@ -151,99 +185,101 @@ public class Plateau {
         return !test;
     }
 
+    /**
+     * @param mot
+     * @param numLig
+     * @param numCol
+     * @param sens
+     * @param e
+     * @return retourne vrai ssi le placement de mot sur this à partir
+     *         de la case (numLig, numCol) dans le sens donné par sens à l’aide
+     *         des jetons de e est valide.
+     */
     public boolean placementValide(String mot, int numLig, int numCol, char sens, MEE e) {
-        char repCapelo='\0';
+        char repCapelo = '\0';
         boolean pasvide = this.g[7][7].estRecouvert();
-        //System.out.println(pasvide);
         boolean test = false;
         boolean test1 = false;
         boolean test2 = false;
         do {
-        System.out.println("CapeloDico valide ce mot O/N ?");
-        repCapelo=Ut.saisirCaractere();
-        }while (!(repCapelo=='O'||repCapelo=='N'));
-       if (repCapelo=='O'){
-        // si le plateau est vide
-        if (pasvide == false) {
-            // System.out.println("vide");
-            if (sens == 'h' && numLig == 7 && numCol <= 7 && numCol >= 0 && numCol + mot.length() > 7
-                    && mot.length() > 2 && lettreexiste(mot, e, numLig, numCol, sens)) {
-                test = true;
-            } else if (sens == 'v' && numCol == 7 && numLig <= 7 && numLig >= 0 && numLig + mot.length() > 7
-                    && mot.length() > 2 && lettreexiste(mot, e, numLig, numCol, sens)) {
-                test = true;
-            }
-        }
-        // sinon si le plateau n'est pas vide
-        else {
-            if (sens == 'h') {
-                // System.out.println("pas vide et h");
-                if (contientUneCaseR(mot, numLig, numCol, sens) && contientUneCaseV(mot, numLig, numCol, sens)
-                        && numCol + mot.length() <= 15 && mêmelettre(mot, numLig, numCol, sens)
-                        && lettreexiste(mot, e, numLig, numCol, sens)) {
-                    test1 = true;
-                    // System.out.println("1");
-                }
-                if (numCol == 0) {
-                    // System.out.println("2.1.1");
-                    if (this.g[numLig][numCol + mot.length()].estRecouvert() == false) {
-                        test2 = true;
-                        // System.out.println("2.1");
-                    }
-                } else if (numCol + mot.length() == 15) {
-                    // System.out.println("2.2.2");
-                    if (this.g[numLig][numCol - 1].estRecouvert() == false)
-
-                        test2 = true;
-                    // System.out.println("2.2");
-                } else {
-                    // System.out.println("2.3.3");
-                    if ((this.g[numLig][numCol - 1].estRecouvert() == false)
-                            && (this.g[numLig][numCol + mot.length()].estRecouvert() == false)) {
-                        test2 = true;
-                        // System.out.println("2.3");
-                    }
+            System.out.println("CapeloDico valide ce mot O/N ?");
+            repCapelo = Ut.saisirCaractere();
+        } while (!(repCapelo == 'O' || repCapelo == 'N'));
+        if (repCapelo == 'O') {
+            // si le plateau est vide
+            if (pasvide == false) {
+                if (sens == 'h' && numLig == 7 && numCol <= 7 && numCol >= 0 && numCol + mot.length() > 7
+                        && mot.length() > 2 && lettreexiste(mot, e, numLig, numCol, sens)) {
+                    test = true;
+                } else if (sens == 'v' && numCol == 7 && numLig <= 7 && numLig >= 0 && numLig + mot.length() > 7
+                        && mot.length() > 2 && lettreexiste(mot, e, numLig, numCol, sens)) {
+                    test = true;
                 }
             }
-            // sinon si le sens du mot est vertical
+            // sinon si le plateau n'est pas vide
             else {
-                // System.out.println("pas vide et v");
-                if (contientUneCaseR(mot, numLig, numCol, sens) && contientUneCaseV(mot, numLig, numCol, sens)
-                        && numLig + mot.length() <= 15 && mêmelettre(mot, numLig, numCol, sens)
-                        && lettreexiste(mot, e, numLig, numCol, sens)) {
-                    test1 = true;
-                    // System.out.println("1");
+                if (sens == 'h') {
+                    if (contientUneCaseR(mot, numLig, numCol, sens) && contientUneCaseV(mot, numLig, numCol, sens)
+                            && numCol + mot.length() <= 15 && mêmelettre(mot, numLig, numCol, sens)
+                            && lettreexiste(mot, e, numLig, numCol, sens)) {
+                        test1 = true;
+                    }
+                    if (numCol == 0) {
+                        if (this.g[numLig][numCol + mot.length()].estRecouvert() == false) {
+                            test2 = true;
+                        }
+                    } else if (numCol + mot.length() == 15) {
+
+                        if (this.g[numLig][numCol - 1].estRecouvert() == false)
+
+                            test2 = true;
+
+                    } else {
+
+                        if ((this.g[numLig][numCol - 1].estRecouvert() == false)
+                                && (this.g[numLig][numCol + mot.length()].estRecouvert() == false)) {
+                            test2 = true;
+
+                        }
+                    }
                 }
-                if (numLig == 0) {
-                    // System.out.println("2.1.1");
-                    if (this.g[numLig + mot.length()][numCol].estRecouvert() == false) {
-                        test2 = true;
-                        // System.out.println("2.1");
+                // sinon si le sens du mot est vertical
+                else {
+
+                    if (contientUneCaseR(mot, numLig, numCol, sens) && contientUneCaseV(mot, numLig, numCol, sens)
+                            && numLig + mot.length() <= 15 && mêmelettre(mot, numLig, numCol, sens)
+                            && lettreexiste(mot, e, numLig, numCol, sens)) {
+                        test1 = true;
+
                     }
-                } else if (numLig + mot.length() == 15) {
-                    // System.out.println("2.2.2");
-                    if (this.g[numLig + 1][numCol].estRecouvert() == false) {
-                        test2 = true;
-                        // System.out.println("2.2");
+                    if (numLig == 0) {
+
+                        if (this.g[numLig + mot.length()][numCol].estRecouvert() == false) {
+                            test2 = true;
+
+                        }
+                    } else if (numLig + mot.length() == 15) {
+
+                        if (this.g[numLig + 1][numCol].estRecouvert() == false) {
+                            test2 = true;
+
+                        }
+                    } else {
+
+                        if ((this.g[numLig + mot.length()][numCol].estRecouvert() == false)
+                                && (this.g[numLig - 1][numCol].estRecouvert() == false)) {
+                            test2 = true;
+
+                        }
                     }
-                } else {
-                    // System.out.println("2.3.3");
-                    if ((this.g[numLig + mot.length()][numCol].estRecouvert() == false)
-                            && (this.g[numLig - 1][numCol].estRecouvert() == false)) {
-                        test2 = true;
-                        // System.out.println("2.3");
-                    }
+
                 }
 
             }
-
+        } else if (repCapelo == 'N') {
+            System.out.println("ERREUR::le mot n'est pas valide par CapeloDico!");
         }
-       }else if (repCapelo=='N'){
-           System.out.println("ERREUR::le mot n'est pas valide par CapeloDico!");
-       }
-        // System.out.println (test1);
-        // System.out.println(test2);
-        // System.out.println(test);
+
         return ((test) || (test1 && test2));
     }
 
@@ -263,8 +299,7 @@ public class Plateau {
         for (int i = 0; i < mot.length(); i++) {
             if (sens == 'h') {
                 if (g[numLig][numCol + i].getCouleur() < 4) {
-                    // System.out.println(nbPointsJet[ Ut.majToIndex( mot.charAt(i) ) ] + " x
-                    // "+g[numLig][numCol+i].getCouleur());
+
                     res += nbPointsJet[Ut.majToIndex(mot.charAt(i))] * g[numLig][numCol + i].getCouleur();
                 } else {
                     res += nbPointsJet[Ut.majToIndex(mot.charAt(i))];
@@ -275,8 +310,7 @@ public class Plateau {
                     }
                 }
             } else {
-                // System.out.println(nbPointsJet[ Ut.majToIndex( mot.charAt(i) ) ] + " x
-                // "+g[numLig+i][numCol].getCouleur());
+
                 if (g[numLig + i][numCol].getCouleur() < 4) {
                     res += nbPointsJet[Ut.majToIndex(mot.charAt(i))] * g[numLig + i][numCol].getCouleur();
                 } else {

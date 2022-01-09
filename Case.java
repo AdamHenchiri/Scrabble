@@ -1,16 +1,30 @@
 public class Case {
-    
+
     private int couleur;
     private char letter;
 
+    /**
+     * 
+     * action : constructeur de Case
+     * 
+     * @param uneCouleur
+     */
     public Case(int uneCouleur) {
         this.couleur = uneCouleur;
     }
 
+    /**
+     * résultat : la couleur de this, un nombre entre 1 et 5
+     * 
+     * @return
+     */
     public int getCouleur() {
         return couleur;
     }
 
+    /**
+     * return la lettre
+     */
     public char getLetter() {
         return letter;
     }

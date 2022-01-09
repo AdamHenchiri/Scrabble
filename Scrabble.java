@@ -13,8 +13,6 @@ public class Scrabble {
             }
             this.plateau = new Plateau();
             int[] sacdebase = { 9, 2, 2, 3, 15, 2, 2, 2, 8, 1, 1, 5, 3, 6, 6, 2, 1, 6, 6, 6, 6, 2, 1, 1, 1, 1 };
-                            //{ 1, 3, 3, 2, 1, 4, 2, 4, 1, 10, 10, 1, 2, 1, 1, 3, 8, 1, 1, 1, 1, 4, 10, 10, 10, 10 }
-            //int[] sacdebase = { 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 1, 2, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0 };
             this.sac=new MEE(sacdebase);
         this.numJoueur=Ut.randomMinMax(0, tabNomJ.length-1); 
         this.partie(sac, plateau, nbPointsJeton);
@@ -24,11 +22,18 @@ public class Scrabble {
     @Override
     public String toString() {
         String affiche=plateau.toString()+"\n"+"c'est au tour du joueur "+ joueurs[numJoueur].getNom();
-        //this.partie(sac, plateau, nbPointsJeton);
-       
         return affiche;
     }
-
+    /**
+     * orchestre une partie de Scrabble. 
+        . la distribution initiale des jetons aux joueurs,
+        . des itérations sur les différents tours de jeu jusqu’à la fin de la partie,
+        . le calcul des scores finaux,
+        . l’affichage du ou des gagnants.
+     * @param sac
+     * @param plateau
+     * @param nbPointsJet
+     */
     public void partie (MEE sac,Plateau plateau,int[] nbPointsJet){
         boolean terminer=false;
         boolean terminer1=false;
@@ -92,7 +97,6 @@ public class Scrabble {
             // cas de terminaison (rare)
             if (terminer1){
              for (int i = 0 ; i < this.joueurs.length ; i++) {
-                // System.out.println(this.joueurs[i].nbPointsChevalet( this.joueurs[i].getChevalet().getTabFreq()) );
                 this.joueurs[i].ajouteScore(this.joueurs[i].nbPointsChevalet(nbPointsJet) * -1);
              }
             int max=joueurs[0].getScore();
@@ -122,12 +126,6 @@ public class Scrabble {
                 win+="Avec le score de "+joueurs[numJoueur].getScore()+" "+joueurs[numJoueur].getNom();
                 numV=numJoueur;
             }  
-            /*int max=joueurs[0].getScore();
-            for (int i=1;i<this.joueurs.length;i++){
-                if (max<joueurs[i].getScore()){
-                    max=joueurs[i].getScore();
-                }
-            }*/
             for (int i=0;i<this.joueurs.length;i++){
                 System.out.println(joueurs[i].getScore());
                 System.out.println(numV);

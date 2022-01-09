@@ -34,11 +34,12 @@ public class Joueur {
     public void setScore(int scr) {
         this.score = scr;
     }
-    /*
-     * pré-requis : nbPointsJet indique le nombre de points rapportés par chaque
+    /**
+     * 
+     * @param nbPointsJet indique le nombre de points rapportés par chaque
      * jeton/lettre
+     * @return le nbr de points du chevalet du joueur this
      */
-
     public int nbPointsChevalet(int[] nbPointsJet) {
 
         int nbPointsChevalet = 0;
@@ -51,8 +52,11 @@ public class Joueur {
         return nbPointsChevalet;
     }
 
-    /* pré-requis : les éléments de s sont inférieurs à 26 */
-
+    /**
+     * prend le nbr nbJetons du sac s vers le chevalet this 
+     * @param s
+     * @param nbJetons
+     */
     public void prendJetons(MEE s, int nbJetons) {
 
         int nbExampTransfer = 0;
@@ -61,11 +65,7 @@ public class Joueur {
                 
                 
                 nbExampTransfer = s.transfereAleat(this.chevalet, nbJetons);
-                //System.out.println(nbJetons+"nbJetons");
-                //System.out.println(nbExampTransfer+"nbExampTransfer");
-                
                 nbJetons = nbJetons - nbExampTransfer;
-                //System.out.println(nbJetons);
             }
             
         }
@@ -85,7 +85,13 @@ public class Joueur {
             System.out.println("sac vide !!");
         }
     }
-
+    /**
+     * 
+     * @param p le plateau
+     * @param s le sac 
+     * @param nbPointsJet le tableau avec les points de chaque Jetons
+     * @return 1 si le joueur this décide de jouer un mot , -1 si il passe son tour et 0 si il echange des Jetons
+     */
     public int joue(Plateau p, MEE s, int[] nbPointsJet) {
 
         int resultat = 0;
@@ -112,13 +118,18 @@ public class Joueur {
             resultat = 1;
             while (!(joueMot(p, s, nbPointsJet))) {
                 System.out.println("placement NON valide");
-               // joueMot(p, s, nbPointsJet);
             }
         }
 
         return resultat;
     }
-
+    /**
+     * 
+     * @param p
+     * @param s
+     * @param nbPointsJet
+     * @return true ssi le placement de ce mot sur le plateau est valide
+     */
     public boolean joueMot(Plateau p, MEE s, int[] nbPointsJet) {
 
         String motjoue = "";
@@ -147,13 +158,26 @@ public class Joueur {
         }
         return test;
     }
-
+    /**
+     * place le mot sur le plateau et ajoute les points au score du joueur this
+     * @param p
+     * @param s
+     * @param nbPointsJet
+     * @param mot
+     * @param numLig
+     * @param numCol
+     * @param sens
+     */
     public void joueMotAux(Plateau p, MEE s, int[] nbPointsJet, String mot, int numLig, int numCol, char sens) {
         p.place(mot, numLig, numCol, sens, s);
         int nbp=p.nbPointsPlacement(mot, numLig, numCol, sens, nbPointsJet);
         this.score+=nbp;
     }
-
+    /**
+     * 
+     * @param mot
+     * @return true si mot à changer et valide 
+     */
     public boolean estCorrectPourEchange(String mot) {
 
         boolean res = false;
@@ -175,17 +199,14 @@ public class Joueur {
         }
         return res;
     }
-
+    /**
+     * echange les jetons demandé
+     * @param sac
+     * @param ensJetons
+     */
     public void echangeJetonsAux(MEE sac, String ensJetons) {
 
         int nbJetEchange = 0;
-
-        /*do {
-            System.out.println("combien de lettre voulez vous echanger ?");
-
-            nbJetEchange = Ut.saisirEntier();
-
-        } while (nbJetEchange < 1 || nbJetEchange > 7);*/
         nbJetEchange=ensJetons.length();
 
         this.prendJetons(sac, nbJetEchange);
@@ -195,7 +216,10 @@ public class Joueur {
             this.chevalet.transfere(sac, Ut.majToIndex(ensJetons.charAt(i)));
         }
     }
-
+    /**
+     * demande le mot a echanger et valide cette transaction ou pas
+     * @param sac
+     */
     public void echangeJetons(MEE sac) {
 
         String ensJetons = "";
