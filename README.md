@@ -13,7 +13,7 @@ dans le cadre du projet <a href="https://moodle.umontpellier.fr/pluginfile.php/1
 
 3- entrer .\Compile.ps1 cela va ouvrir compiler et exécuter les multiples classes du dossier joint.
 
-<h2>si le terminal est l’invite de commande (cmd).</h2>
+<h2>Si le terminal est l’invite de commande (cmd).</h2>
 
 1- télécharger le document joint
 
@@ -21,9 +21,11 @@ dans le cadre du projet <a href="https://moodle.umontpellier.fr/pluginfile.php/1
 
 <h2>Si autre terminal :</h2>
 
-1- Ouvrir l’ensemble des méthodes présentes dans le dossier joint afin de sauvegarder ces dernières et que votre ordinateur puisse les reconnaître.
+1- télécharger le document joint
 
-2-Ouvrir le terminal de votre ordinateur et saisir : 
+2- Ouvrir l’ensemble des méthodes présentes dans le dossier joint afin de sauvegarder ces dernières et que votre ordinateur puisse les reconnaître.
+
+3-Ouvrir le terminal de votre ordinateur et saisir : 
 
   javac MainScrabble.java
 
