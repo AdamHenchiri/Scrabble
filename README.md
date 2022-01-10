@@ -2,6 +2,7 @@
 <h1>EXPLICATIONS :</h1>
 
 dans le cadre du projet <a href="https://moodle.umontpellier.fr/pluginfile.php/1121002/mod_folder/content/0/DEVELOPPEMENT%20INITIATIQUE/SAE%20Scrabble/sujet-scrabble.pdf?forcedownload=1">d'SAE 1.01 </a>durant le premier semestre du B.U.T informatique, nous avons programmé en programmation orientée objet une partie de <a href="https://fr.wikipedia.org/wiki/Scrabble">Scrabble</a>. Au travers de multiples classes nous sommes parvenus à concevoir un programme qui permet de jouer à ce jeu en prenant en compte l’ensemble des paramètres quels qu’ils soient. Le jeu est conforme au modèle classique à l’exception de l’absence d’extension due à un soucis de temps.
+RQ: pour la version 3.2 avec les lettres pour les ligne il faut telecharger les fichier de la branche <a href="https://github.com/AdamHenchiri/Scrabble/tree/3.2-Rep%C3%A9rage-des-cases-du-plateau-avec-lettre/extension_lettre_ligne">3.2-Repérage-des-cases-du-plateau-avec-lettre" </a> et non du <a href="https://github.com/AdamHenchiri/Scrabble">main</a>
 
 <h1>Notice d’utilisation :</h1>
 
